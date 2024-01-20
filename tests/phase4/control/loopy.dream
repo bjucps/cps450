@@ -1,0 +1,18 @@
+class loopy is
+  x: int
+  
+  start() is
+  begin
+    x := 3
+    if (x > 0) then
+      loop while x > 0
+        out.writeint(x)
+        x := x - 1
+      end loop
+    else
+      out.writeint(999)
+    
+    end if
+  end start    
+
+end loopy

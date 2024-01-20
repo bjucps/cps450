@@ -1,0 +1,17 @@
+~ CReadint.dream
+~ - Tests readint
+
+class CReadint is
+
+  start() is
+    x: int
+    y: int
+  begin 
+    x := in.readint()
+    y := in.readint()
+    out.writeint(x) 
+    out.writeint(y)
+    
+  end start
+end CReadint
+

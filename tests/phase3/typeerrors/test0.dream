@@ -1,0 +1,39 @@
+~ test0.dream
+~ Tests scalar type checking with assignment stmts
+
+class test0 is
+
+  b1: boolean
+  b2: boolean
+  b3: boolean
+  
+  i1: int
+  i2: int
+  s1: string  ~ unsupported feature
+  s2: string
+
+  start() is
+  begin
+  
+    b1 := true
+    b2 := not b1 and true
+    b3 := i1 > i2
+    b2 := 5                     ~ type mismatch can't assign int to boolean
+    b3 := b1 >= true            ~ >= can't work on boolean
+  
+    i1 := 10
+    i1 := 10 * i2 - i1
+    i1 := false                 ~ type mismatch can't assign boolean to int
+    i1 := 10 + i2 - b1          ~ type error can't subtract boolean from int
+  
+    s1 := "hello" & s2          ~ unsupported feature
+    
+    in.readint(3)               ~ error: wrong number of parameters for readint
+    i1.readint(3)               ~ error: readint not invoked on Reader object
+    
+    out.writeint("Hi!")         ~ type error: wrong parameter for writeint
+    out.writeint()              ~ error: wrong number of parameters for write
+    out.writeint(3, 5)          ~ error: wrong number of parameters for write
+  end start
+  
+end test0

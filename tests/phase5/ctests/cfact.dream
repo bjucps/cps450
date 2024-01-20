@@ -1,0 +1,39 @@
+~ CFact.dream
+~ - Implements recursive factorial algorithm
+
+class CFact is
+
+ num: int
+ num2: int
+
+ Fact(num: int): int is
+   answer: int
+ begin
+    if num = 0 then    
+      answer := 1
+    else
+      answer := num * Fact(num - 1)
+    end if
+    Fact := answer
+ end Fact
+  
+  ~ Accesses global variable num
+  Go() is
+   isOk: boolean
+  begin
+    isOk := false
+    loop while not isOk
+      num := in.readint()       
+      isOk := (num >= 1)
+    end loop    
+  end Go
+ 
+  start() is
+  begin 
+    Go()
+    num2 := Fact(num)
+    out.writeint(num)   ~ Original number
+    out.writeint(num2)  ~ factorial of num
+  end start
+end CFact
+

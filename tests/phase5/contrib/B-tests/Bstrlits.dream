@@ -1,0 +1,34 @@
+~ Bstrlits.dream
+~ - Simple String literal tests, especially escape sequences
+
+class Bstrlits is
+
+  s: String
+
+  print(q: String): String is
+  begin
+    out.write("q = ".cat(q).cat("\n"))
+  end print
+
+  start() is
+    s: String
+  begin
+    s := "This is a test."
+    print(s)
+    s := "This is a\ttab."
+		print(s)
+		s := "This is a\rcarriage return."
+		print(s)
+		s := "This is a\nnewline."
+		print(s)
+		s := "This is a\fform feed."
+		print(s)
+		s := "This is a\\backslash."
+		print(s)
+		s := "This is a \"quote\""
+		print(s)
+		s := "This is an\011octal tab."
+		print(s)
+  end start
+  
+end Bstrlits

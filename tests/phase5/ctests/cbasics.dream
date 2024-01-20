@@ -1,0 +1,45 @@
+~ CBasics.dream
+~ - Tests C-level parameter passing and variable access
+~ - Expected output: 0 10 20 0 10 -5 0 10 20 -5 25
+
+class CBasics is
+  d: int  
+  
+  meth2(a: int; b: int): int is
+    c: int
+  begin
+    meth2 := a + b  ~ 25
+    a := 10
+    out.writeint(a) ~ 10 
+    out.writeint(b) ~ -5 
+    out.writeint(c) ~ 0
+    
+  end meth2
+
+  meth1(a: int; b: int): int is
+    c: int
+  begin
+    d := -5
+    meth1 := meth2(a + b, d)
+    out.writeint(a) ~ 10
+    out.writeint(b) ~ 20    
+  end meth1
+
+  start() is
+    num: int
+    x: int
+    y: int
+  begin 
+    x := 10
+    y := 20
+    out.writeint(num)  ~ should be 0
+    out.writeint(x) ~ 10
+    out.writeint(y) ~ 20    
+    out.writeint(d) ~ 0
+    num := meth1(x, y)
+    out.writeint(d) ~ -5
+    out.writeint(num) ~ 25
+    
+  end start
+end CBasics
+

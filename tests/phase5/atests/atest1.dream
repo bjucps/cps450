@@ -1,0 +1,56 @@
+~ ATest1.dream
+
+class Parent is
+  x: int
+ 
+  initP(newX: int): Parent is
+  begin
+    x := newX
+    initP := me
+  end initP
+
+  foo() is
+  begin
+    out.writeint(x)
+  end foo
+
+  getX(): int is
+  begin
+    getX := x
+  end getX
+
+end Parent
+
+class Child inherits from Parent is
+  y: int
+
+  initC(newX: int; newY: int): Child is
+  begin
+    initP(newX)
+    y := newY
+    initC := me
+  end initC
+
+  getY(): int is
+  begin
+    getY := y
+  end getY
+
+  ~ overrides Parent's foo method
+  foo() is
+  begin
+    out.writeint(getX()+y)
+  end foo
+end Child
+
+class ATest1 is
+
+  start() is
+    c: Child
+    p: Parent
+  begin
+    c := (new Child).initC(10, 20)
+    c.foo()
+  end start
+
+end ATest1

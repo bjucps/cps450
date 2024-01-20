@@ -1,0 +1,71 @@
+~ Bnulltest.dream
+~ - Checks to see if null pointer exception checking is being performed
+
+class Point is
+  x: int
+  y: int
+  
+  init(initX: int; initY: int): Point is
+  begin
+    x := initX
+    y := initY
+    init := me  ~ return this object's reference
+  end init
+    
+  getX(): int is
+  begin
+    getX := x
+  end getX
+  
+  getY(): int is
+  begin
+    getY := y
+  end getY
+  
+  print() is
+  begin
+    out.writeint(x)
+    out.writeint(y)
+  end print
+
+  setXY(newX: int; newY: int) is
+  begin
+    x := newX
+    y := newY
+  end setXY
+
+  setX(newX: int) is
+  begin
+    setXY(newX, y)
+  end setX
+  
+  setY(newY: int) is
+  begin
+    y := newY
+  end setY
+  
+end Point
+
+~ main class
+class Bnulltest is
+
+  doit(p: Point) is
+  begin
+    p.print()  ~ null pointer exception occurs when called from line 67
+  end doit
+
+  start() is
+    p1: Point
+    p2: Point
+  begin
+    p1 := new Point
+    p1.init(5, 10)
+    
+    p2 := null
+    
+    doit(p1)
+    doit(p2)  
+
+  end start
+  
+end Bnulltest

@@ -1,0 +1,93 @@
+~ ATestPoly.dream - polymorphism test
+
+class Parent is
+  x: int
+  kind: int  ~ 0 if Parent, 1 if Child
+ 
+  initP(newX: int): Parent is
+  begin
+    x := newX
+    kind := 0
+    initP := me
+  end initP
+
+  foo() is
+  begin
+    out.writeint(x)
+  end foo
+
+  getX(): int is
+  begin
+    getX := x
+  end getX
+  
+  setKind(k: int) is
+  begin
+    kind := k
+  end setKind
+  
+  getKind(): int is
+  begin
+    getKind := kind
+  end getKind
+
+end Parent
+
+class Child inherits from Parent is
+  y: int
+
+  initC(newX: int; newY: int): Child is
+  begin
+    initP(newX)
+    y := newY
+    setKind(1)
+    initC := me
+  end initC
+
+  getY(): int is
+  begin
+    getY := y
+  end getY
+
+  ~ overrides Parent's foo method
+  foo() is
+  begin
+    out.writeint(getX()+y)
+  end foo
+end Child
+
+~ ---------------- Main class ----------------------
+
+class ATestPoly is
+
+  goo(p: Parent) is
+    c: Child
+  begin
+    p.foo()
+    if (p.getKind() = 1) then
+      c := p
+      out.writeint(c.getY()) ~ 20
+    end if
+  end goo
+
+  start() is
+    c: Child
+    p: Parent
+  begin
+    c := (new Child).initC(10, 20)
+    c.foo()
+                
+    p := (new Child).initC(50, 80)
+    p.foo()  ~ calls Child's foo()
+    
+    goo(p)
+    
+    p := (new Parent).initP(50)
+    p.foo()
+
+    c := p  ~ should be permitted at compile time, but trigger error at runtime    
+    c.getY() ~ we should never get here
+    
+  end start
+
+end ATestPoly

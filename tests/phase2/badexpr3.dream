@@ -1,0 +1,27 @@
+~ badexpr3.dream
+~ Test expressions if dream
+
+class express is
+
+  x: int
+  y: int
+  z: int
+  a: int
+  b: int
+  c: int
+  i: int
+  j: int
+  k: int
+  bob() is 
+    begin
+      a:=(b>a)+(c=3)-((i<=j)+k)*-1                      ~ <= illegal
+      
+      x=y                                               ~ Bad Assignment
+
+      x:=y+j*3/4**4+3                                   ~ Two mults
+      
+      x:=y+((j*3/4)+(3+2)*(4+(3)))+(not 4)-(3 and 4))+z ~ mismatched ()
+          
+    end bob
+
+end express

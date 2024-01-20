@@ -1,0 +1,58 @@
+~ CChange.dream
+~ Calculates quarters, dimes, nickles, and pennies for a purchase of a given amount
+
+class CChange is
+
+  Amt : int
+  Quarters : int
+  Dimes : int
+  Nickels : int
+
+  ComputeChange(amt: int; denom: int): int is
+  begin
+    ComputeChange := amt / denom
+  end ComputeChange
+
+  ComputeRemain(amt: int; denom: int; qtydenom: int): int is
+  begin
+    ComputeRemain := amt - denom * qtydenom
+  end ComputeRemain
+
+  start() is
+  begin
+    Amt := in.readint()
+~    out.writeint(Amt)
+
+   ~ compute quarters
+    Quarters := ComputeChange(Amt, 25)
+    if (Quarters > 0) then
+       out.writeint(Quarters)
+    else
+       out.writeint(0)  
+    end if
+    Amt := ComputeRemain(Amt, 25, Quarters)
+
+    ~ Dimes
+    Dimes := ComputeChange(Amt, 10)
+    if (Dimes > 0) then
+        out.writeint(Dimes)
+    else
+        out.writeint(0)
+    end if
+    Amt := ComputeRemain(Amt, 10, Dimes)
+
+    Nickels := ComputeChange(Amt, 5)
+    if (Nickels > 0) then
+       out.writeint(Nickels)
+    else
+       out.writeint(0)
+    end if
+
+    Amt := ComputeRemain(Amt, 5, Nickels)
+
+    if (Amt > 0) then
+       out.writeint(Amt)
+    end if
+  end start
+  
+end CChange

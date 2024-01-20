@@ -1,0 +1,44 @@
+~ Tests scalar type checking with method calls
+
+class meth1 is
+
+  b1: boolean
+  i1: int
+  
+  s1: string
+  
+  boolmeth(x: int; b1: boolean): boolean is
+  begin
+    boolmeth := b1 or (x > 5)
+  end boolmeth
+  
+  strmeth(): string is
+  begin
+    strmeth := "Test"
+  end strmeth
+  
+  voidmeth(x: int) is
+  begin
+    x := x + 1
+  end voidmeth  
+
+  start() is
+  begin
+  
+    b1 := boolmeth(5)        ~ ERROR: too few parms
+    b1 := boolmeth("hello")  ~ ERROR: wrong parm type
+    b1 := boolmeth(5, false, "hello") ~ ERROR: too many parms
+    boolmeth(true, 5)         ~ ERROR: incompatible parameter types
+    i1 := boolmeth(5, false) ~ ERROR: incompatible types for assignment
+    
+  
+    s1 := s1 & strmeth()
+    out.writeint("test")    ~ ERROR: wrong parameter type
+    in.writeint()              ~ ERROR: no such method for in
+    i1 := in.readint(15)    ~ ERROR: too many parameters
+    
+    b1 := voidmeth(5)     ~ ERROR: void method
+    
+  end start
+
+end meth1

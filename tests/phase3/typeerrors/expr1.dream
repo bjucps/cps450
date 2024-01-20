@@ -1,0 +1,41 @@
+~ expr1.dream
+~ Tests expression type checking
+
+class Expr1 is
+
+  n1: int
+  n2: int
+  b1: boolean
+  b2: boolean
+  b4: boolean
+ 
+  b5 := false            ~ ERROR: unsupported feature
+
+  it2: int := 3          ~ ERROR: unsupported feature
+  badone                 ~ ERROR: no type specified
+
+  start() is
+  begin
+    ~ legal
+  
+    b1 := b2
+    b2 := true and not b1 or b2
+    n1 := 5 * 15 - 2
+    n2 := -35 + 15 * n1 / n2
+  
+    ~ illegal
+  
+    b1 := n1            ~ ERROR: cannot assign int to boolean
+    b1 := 5 * b2        ~ ERROR: the * op can only be used with ints and reals
+    b2 := 5 * 3		      ~ ERROR: b2 cannot be assigned to an integer
+    n1 := 5 & 3		      ~ ERROR: the & bin op can only be used with strings
+    b2 := true + false	~ ERROR: the + bin op cannot be used with booleans
+  
+    b2 := +false		    ~ ERROR: the + unary op cannot be used with a boolean
+    n1 := - b2          	  ~ ERRROR: the - unary op cannot be used with a boolean
+    b4 := not 13   	    ~ ERROR: not requires a boolean
+  
+  end start
+  
+end Expr1
+

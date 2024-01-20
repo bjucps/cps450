@@ -1,0 +1,33 @@
+~ Cgcd.dream
+~ - Implements recursive greatest common divisor algorithm
+~ - Tests recursion, and assignment to parameters
+
+class Cgcd is 
+ x: int
+ y: int
+ ans: int
+
+  gcd(a: int; b: int): int is
+  begin
+    if b = 0 then
+      gcd := a
+    else
+      a := gcd(b, a - (a / b) * b)
+      gcd := a
+    end if
+  end gcd
+
+  displayres(ans: int) is
+  begin
+    out.writeint(ans)
+  end displayres
+
+  start() is
+  begin
+    x := in.readint()
+    y := in.readint()
+    ans := gcd(x,y)
+    displayres(ans)
+  end start
+end Cgcd
+

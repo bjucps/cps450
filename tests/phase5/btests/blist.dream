@@ -1,0 +1,214 @@
+~ ---------------------------------------------------------
+~ File: list.dream
+~ An implementation of a linked list
+~ ---------------------------------------------------------
+
+
+~ ********************************************
+~  ListNode is used internally by the List class
+~ ********************************************
+
+class ListNode is
+  data: int
+  next: ListNode
+  
+  init(initData: int): ListNode is
+  begin
+    data := initData
+    next := null
+    init := me
+  end init
+  
+  getData(): int is
+  begin
+    getData := data
+  end getData
+
+  setData(newData: int): int is
+  begin
+    data := newData
+  end setData
+
+  getNext(): ListNode is
+  begin
+    getNext := next
+  end getNext
+  
+  setNext(node: ListNode) is
+  begin
+    next := node
+  end setNext
+  
+end ListNode
+
+~ ********************************************
+~ An class that holds a list of numbers
+~ Uses a linked list of ListNodes to hold the data
+~ ********************************************
+
+class List is
+
+  head: ListNode  ~ points to first node in List
+  
+  ~ adds <item> to end of this List
+  add(item: int): List is
+    curnode: ListNode
+    node: ListNode
+  begin
+    node := (new ListNode).init(item)
+    
+    if head = null then
+      head := node
+    else
+      curnode := head
+      loop while not (curnode.getNext() = null)
+        curnode := curnode.getNext()
+      end loop
+      curnode.setNext(node)
+    end if
+    add := me
+  end add
+  
+  ~ returns item at position <index> in this List, or -1 if <index> is out of bounds
+  get(index: int): int is
+    curNode: ListNode
+  begin
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      get := curNode.getData()
+    else
+      get := -1
+    end if
+  end get
+  
+  ~ returns the number of items in this List
+  length(): int is
+    i: int
+    curNode: ListNode
+  begin
+    curNode := head
+    i := 0
+    loop while not (curNode = null)
+      i := i + 1
+      curNode := curNode.getNext()
+    end loop
+    length := i
+  end length
+  
+  ~ removes item at position <index>
+  ~ does nothing if <index> is out of range
+  remove(index: int) is
+    curNode: ListNode
+    prevNode: ListNode
+  begin
+    prevNode := null
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      prevNode := curNode
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      ~ We found the item to delete
+      if prevNode = null then
+        head := curNode.getNext()
+      else
+        prevNode.setNext(curNode.getNext())
+      end if    
+    end if
+  end remove
+  
+  ~ changes item at position <index> to <item>
+  ~ does nothing if <index> is out of range
+  set(index: int; item: int) is
+    curNode: ListNode
+  begin
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      curNode.setData(item)
+    end if
+  end set
+  
+  ~ returns representation of this List as a String
+  toString(): String is
+    str: String
+    curNode: ListNode
+  begin
+    curNode := head
+    str := "["
+    loop while not (curNode = null)
+      str := str.catInt(curNode.getData())
+      curNode := curNode.getNext()
+      if not (curNode = null) then
+        str := str.catChar(44) 
+      end if
+    end loop
+    toString := str.cat("]")
+  end toString
+  
+  ~ prints list to stdout, one per line
+  print() is
+    curNode: ListNode
+  begin
+    curNode := head
+    
+    loop while not (curNode = null)
+      out.writeint(curNode.getData())
+      curNode := curNode.getNext()
+    end loop
+  end print
+  
+  ~ used in test program
+  assert(cond: boolean; linenum: int) is
+    s: String
+  begin
+    if not cond then
+      out.writeint(linenum) ~ print line number of failed test
+      s.length()    ~ force null pointer exception to terminate program
+    end if
+  end assert
+
+  ~ built-in test program for List. does not use any String processing
+  start() is
+    list: List
+    startLine: int
+  begin
+    startLine := 187
+    list := (new List).add(10).add(20).add(30)
+    
+    assert(list.get(0) = 10, startLine + 3)
+    assert(list.get(2) = 30, startLine + 4)
+    assert(list.get(3) = -1, startLine + 5)
+    
+    list.add(40)
+    list.add(50)     ~ 10 20 30 40 50
+    assert(list.get(4) = 50, startLine + 9)
+    
+    list.remove(2) 
+    list.set(2, 5)  ~ 10 20 5 50
+    assert(list.get(2) = 5, startLine + 13)
+    assert(list.get(3) = 50, startLine + 14)
+    
+    list.print() ~ 10 20 5 50
+    
+    ~ uncomment the following lines to test toString()
+    
+    ~ assert((new List).toString().eq("[]"), startLine + 20)
+    ~ assert(list.toString().eq("[10,20,5,50]"), startLine + 21)
+    ~ out.writeln(list.toString())
+    ~ out.writeln((new List).toString())
+    
+  end start
+  
+end List

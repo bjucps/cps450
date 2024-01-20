@@ -1,0 +1,32 @@
+~ expr1.dream
+~ Tests expression type checking
+
+class Expr1 is
+
+  n1: int
+  n2: int
+  b1: boolean
+  b2: boolean
+  
+  start() is
+  begin
+    ~ legal
+  
+    b1 := b1
+    b1 := b2
+    b2 := true and (not b1)
+    n1 := 5 * 15 - 2
+    n2 := -35 + 15 * n1 / n2
+  
+  
+    b1 := b2
+    n2 := 5 * 3
+    b2 := true
+  
+    b2 := false
+    b2 := not b1
+  
+  end start
+  
+end Expr1
+

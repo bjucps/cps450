@@ -1,0 +1,41 @@
+~ Bstrbasics.dream
+~ - Simple String concatenation and other method tests
+
+class Bstrbasics is
+
+  s: String
+
+  print(q: String): String is
+  begin
+    print := "q = ".cat(q).cat("\n")
+  end print
+
+  start() is
+    len: int
+    firstCh : int
+  begin
+    out.write("Enter a string of characters:")
+    s := in.readline()
+    len := s.length()
+    firstCh := s.charAt(0)
+    
+    out.write("s has ".catInt(len).cat(" characters.\n"))
+    out.write("charAt(0) = '".catChar(firstCh).cat("'\n"))
+
+    if s.gt(" ") then
+       out.write("s > ' '\n")
+    else
+       out.write("! s > ' '\n")
+    end if
+  
+    if s.gteq(" ") then
+      out.write("s >= ' '\n")
+    else
+       out.write("! s >= ' '\n")
+    end if
+        
+    out.write(print("wowsers!"))
+
+  end start
+  
+end Bstrbasics

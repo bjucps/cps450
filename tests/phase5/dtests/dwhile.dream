@@ -1,0 +1,45 @@
+~ cwhile.dream - while statement 
+~ Expected Output: 1 2 3 4 1 1 1 2 1 1 1 2 1 1 1 2
+class CWhile is
+
+ a: int
+ b: int
+ c: int
+ d: int
+ i: int
+ j: int
+ k: int
+
+  start() is
+  begin
+    b := 5 
+    c := 2 
+    d:= 5
+  
+    a := 1
+    loop while not (a >= d) ~ while a < d 
+      out.writeint(a)
+      a := a + 1
+    end loop
+  
+    i := 5
+    loop while not (i > (c+d))   ~ while i <= 7
+  
+      j := 1
+      loop while not (j >= 4)  ~ while j < 4
+  
+        k := i
+        loop while not (k > j) ~ while k <= j
+          out.writeint(0)
+          k := k + 1
+        end loop
+  
+        out.writeint(1)
+        j := j + 1
+      end loop
+  
+      out.writeint(2)
+      i := i + 1
+    end loop
+  end start
+end CWhile

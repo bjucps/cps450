@@ -1,0 +1,265 @@
+
+~ ********************************************
+~  ListNode is used internally by the List class
+~ ********************************************
+
+class ListNode is
+  data: Oyd
+  next: ListNode
+  
+  init(initData: Oyd): ListNode is
+  begin
+    data := initData
+    next := null
+    init := me
+  end init
+  
+  getData(): Oyd is
+  begin
+    getData := data
+  end getData
+
+  setData(newData: Oyd): Oyd is
+  begin
+    data := newData
+  end setData
+
+  getNext(): ListNode is
+  begin
+    getNext := next
+  end getNext
+  
+  setNext(node: ListNode) is
+  begin
+    next := node
+  end setNext
+  
+end ListNode
+
+~ ********************************************
+~ An class that holds a list of numbers
+~ Uses a linked list of ListNodes to hold the data
+~ ********************************************
+
+class List is
+
+  head: ListNode  ~ points to first node in List
+  
+  ~ adds <item> to end of this List
+  add(item: Oyd): List is
+    curnode: ListNode
+    node: ListNode
+  begin
+    node := (new ListNode).init(item)
+    
+    if head = null then
+      head := node
+    else
+      curnode := head
+      loop while not (curnode.getNext() = null)
+        curnode := curnode.getNext()
+      end loop
+      curnode.setNext(node)
+    end if
+    add := me
+  end add
+  
+  ~ returns item at position <index> in this List, or null if <index> is out of bounds
+  get(index: int): Oyd is
+    curNode: ListNode
+  begin
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      get := curNode.getData()
+    else
+      get := null
+    end if
+  end get
+  
+  ~ returns the number of items in this List
+  length(): int is
+    i: int
+    curNode: ListNode
+  begin
+    curNode := head
+    i := 0
+    loop while not (curNode = null)
+      i := i + 1
+      curNode := curNode.getNext()
+    end loop
+    length := i
+  end length
+  
+  ~ removes item at position <index>
+  ~ does nothing if <index> is out of range
+  remove(index: int) is
+    curNode: ListNode
+    prevNode: ListNode
+  begin
+    prevNode := null
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      prevNode := curNode
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      ~ We found the item to delete
+      if prevNode = null then
+        head := curNode.getNext()
+      else
+        prevNode.setNext(curNode.getNext())
+      end if    
+    end if
+  end remove
+  
+  ~ changes item at position <index> to <item>
+  ~ does nothing if <index> is out of range
+  set(index: int; item: Oyd) is
+    curNode: ListNode
+  begin
+    curNode := head
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      curNode.setData(item)
+    end if
+  end set
+  
+  ~ returns representation of this List as a String
+  toString(): String is
+    str: String
+    curNode: ListNode
+  begin
+    curNode := head
+    str := "["
+    loop while not (curNode = null)
+      str := str.cat(curNode.getData().toString())
+      curNode := curNode.getNext()
+      if not (curNode = null) then
+        str := str.catChar(44) 
+      end if
+    end loop
+    toString := str.cat("]")
+  end toString
+end List
+
+class Employee is
+  age: int
+ 
+  initEmp(newAge: int): Employee is
+  begin
+    age := newAge
+    initEmp := me
+  end initEmp
+  
+  getClassName(): String is
+  begin
+    getClassName := "Employee"
+  end getClassName
+
+  getSalary(): int is
+  begin
+    getSalary := age * 1000
+  end getSalary
+  
+  getAge(): int is
+  begin
+    getAge := age
+  end getAge
+  
+  toString(): string is
+  begin
+    toString := "I'm a ".cat(getClassName()).cat(" and I get paid ").catInt(getSalary()).cat(".").cat("\n")
+  end toString
+
+end Employee
+
+class HourlyEmployee inherits from Employee is
+  hours: int
+  rate: int
+
+  initHEmp(newAge: int; newHours: int; newRate: int): HourlyEmployee is
+  begin
+    initEmp(newAge)
+    hours := newHours
+    rate := newRate
+    initHEmp := me
+  end initHEmp
+
+  getClassName(): String is
+  begin
+    getClassName := "HourlyEmployee"
+  end getClassName
+
+  getSalary(): int is
+  begin
+    getSalary := hours * rate * me.getAge()
+  end getSalary
+
+end HourlyEmployee
+
+class SalariedEmployee inherits from Employee is
+  salary: int
+  
+  initSEmp(newAge: int; newSalary: int): SalariedEmployee is
+  begin
+    initEmp(newAge)
+    salary := newSalary
+    initSEmp := me
+  end initSEmp
+  
+  getClassName(): String is
+  begin
+    getClassName := "SalariedEmployee"
+  end getClassName  
+  
+  getSalary(): int is
+  begin
+    getSalary := salary * getAge()
+  end getSalary
+  
+end SalariedEmployee
+
+
+class Aarrlist is
+
+  start() is
+    list: List
+    i: int
+    emp: Employee
+  begin
+    list := new List
+    
+    list.add("Nancy")
+    list.add("Suzie")
+    list.add((new Employee).initEmp(30))
+    list.add((new SalariedEmployee).initSEmp(30, 100))
+    list.add((new HourlyEmployee).initHEmp(30, 10, 40))
+    out.write(list.toString())
+    
+    list.add("George")
+    list.add("Harold")
+    
+    list.remove(0) ~ Nancy
+    list.remove(0) ~ Suzie
+    
+    i := 0
+    loop while list.length() > i
+      emp := list.get(i)
+      out.write("Employee ".catInt(i).cat(", type ").cat(emp.getClassName()).cat(", gets paid ").catInt(emp.getSalary()).cat("\n"))
+      i := i + 1
+    end loop
+        
+  end start
+
+end Aarrlist

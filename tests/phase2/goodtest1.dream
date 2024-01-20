@@ -1,0 +1,20 @@
+~ Test1.dream
+class Main is 
+  ~ Attributes
+  r1: string := ""
+  y := 3
+
+  start() is
+  begin
+    loop while s.equals("")
+      out.write("Hey, \"Sue!\"")
+      s := in.readline()
+      if not s.equals("") then 
+        out.write(s)
+      end if
+      y := y + 1 * 2 / (56 + 2) - 3
+      out.write((s & "This is a test.").cat("Hey"))
+    end loop
+  end start
+
+end Main

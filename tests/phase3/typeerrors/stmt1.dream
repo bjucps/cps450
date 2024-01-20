@@ -1,0 +1,29 @@
+~
+~ stmt1.dream
+~ - Tests semantics of statements
+~
+
+class stmt1 is
+
+  x: int
+
+  start() is
+  begin
+    loop while true
+      x := x + 1
+    end loop
+  
+    if false then
+      x := x - 1
+    end if
+  
+    loop while 15 - 3   ~ ERROR: wrong type for while condition
+      x := x + 1
+    end loop
+  
+    if "Hello" then   ~ ERROR: wrong type for IF
+      x := x - 1
+    end if
+  end start
+
+end stmt1

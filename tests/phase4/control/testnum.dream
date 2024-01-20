@@ -1,0 +1,26 @@
+~ testnum.ood
+
+~ For positive number, prints 1/9
+~ For zero, prints 0/9/9
+~ For negative number, prints -1/9/9
+
+class testnum is
+  x: int
+
+  start() is
+  begin
+    x := in.readint()
+    if (x > 0) then
+      out.writeint(1)
+    else
+      if (x = 0) then
+        out.writeint(0)
+      else
+        out.writeint(-1)
+      end if
+      out.writeint(9)
+    end if
+    out.writeint(9)
+  end start
+
+end testnum

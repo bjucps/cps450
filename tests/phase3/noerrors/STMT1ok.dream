@@ -1,0 +1,21 @@
+~
+~ stmt1.dream
+~ - Tests semantics of loop statements
+~
+
+class stmt1 is
+
+  x: int
+
+  start() is
+  begin
+    loop while true
+      x := x + 1
+    end loop
+  
+    if false then
+      x := x - 1
+    end if
+  end start 
+
+end stmt1

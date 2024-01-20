@@ -1,0 +1,30 @@
+~  Assign1.ood
+~  This program tests assignment
+
+class Assign1 is
+
+  x: int
+  y: int
+  z: int
+  b1: boolean
+  b2: boolean
+
+  start() is
+  begin
+    x := 5
+    y := x * (8 - x)
+  
+    b1 := true
+    b2 := not false
+    b2 := not (not b2 or b1)
+  
+    out.writeint(y)              ~ 15
+    out.writeint(x / 2)          ~ 2
+  
+    y := y - x
+    out.writeint(y + 4)          ~ 14
+    out.writeint(-(9 - 5))       ~ -4
+    out.writeint(5 - 2 * 3 + 1)  ~ 0
+  end start
+  
+end Assign1

@@ -1,0 +1,23 @@
+~this program is incorrect
+
+class Main is
+  x: int
+  y: int
+  c: boolean
+
+  start() is
+    begin
+      x := -5
+      z := not x
+      a := not x + 6                 ~ ((not x) + 6)
+      b := y - 7 > 5 = y             ~ illegal
+      x := y / 3
+      c := x > 3 or 5                ~ ((x > 3) or 5)
+      c := -x >= 2 * 5               ~ ((-x) >= (2 * 5))
+      c := +x - 10 * 11 = 2 / 3      ~ (((+x) - (10 * 11)) = (2 / 3))
+      x := y + z / x - a * z         ~ (((+x) - (10 * 11)) = (2 / 3))
+      x := y + z / x - a + z / 2     ~ (((y + (z / x)) - a) + (z / 2))
+      x := x + 2 + 3 + 4             ~ (((x + 2) + 3) + 4)
+      x := 5 + z / 3 * 3 + 2 + b / 3 ~ (((5 + ((z / 3) * 3)) + 2) + (b / 3))
+  end start
+end Main

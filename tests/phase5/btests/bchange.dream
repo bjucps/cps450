@@ -1,0 +1,45 @@
+~ BChange.dream
+~ Calculates quarters, dimes, nickles, and pennies for a purchase of a given amount
+
+class BChange is
+
+  Amt : int
+  Quarters : int
+  Dimes : int
+  Nickels : int
+
+  ComputeChange(amt: int; denom: int): int is
+  begin
+    ComputeChange := amt / denom
+  end ComputeChange
+
+  ComputeRemain(amt: int; denom: int; qtydenom: int): int is
+  begin
+    ComputeRemain := amt - denom * qtydenom
+  end ComputeRemain
+
+  start() is
+  begin
+    out.write("Enter the amount of the purchase in cents: ")
+    Amt := in.readint()
+~    out.writeint(Amt)
+
+   ~ compute quarters
+    Quarters := ComputeChange(Amt, 25)
+    out.write("Quarters: ".catInt(Quarters).cat("\n"))
+    Amt := ComputeRemain(Amt, 25, Quarters)
+
+    ~ Dimes
+    Dimes := ComputeChange(Amt, 10)
+    out.write("Dimes: ".catInt(Dimes).cat("\n"))
+    Amt := ComputeRemain(Amt, 10, Dimes)
+
+    Nickels := ComputeChange(Amt, 5)
+    out.write("Nickels: ".catInt(Nickels).cat("\n"))
+
+    Amt := ComputeRemain(Amt, 5, Nickels)
+
+    out.write("Pennies: ".catInt(Amt).cat("\n"))
+  end start
+  
+end BChange

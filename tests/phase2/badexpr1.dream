@@ -1,0 +1,33 @@
+~  TEST1.dream
+~  Written by Dan Hartley translated to dream by David Bentley
+~  CPS450
+~  This program tests various expression as defined by the dream grammar
+
+
+class Test1 is
+  array1: int[3]
+  x: int := 0
+  y: int := 0
+  z: int := 0
+
+  start() is
+  begin
+ 
+    x := 3                       ~ expression -> literal
+    y := x                       ~ expression -> id
+    z := x + y -                 ~ This line has an error
+                                 ~   it leaves off a number at the end
+    x := y * z / 4               ~ expression -> expr binary-op expr
+    y := -y                      ~ expression -> unary-op expr
+    y := +y                      ~ expression -> unary-op expr
+    z := (x + y                  ~ This line has an error
+                                 ~   it leaves off a right parenthesis
+    y := x + (y - x + (x + y))   ~ expression -> expr binary-op ( expr )
+
+    array1[0] := x
+    array1[1] := y
+    array1[2] := z
+
+  end start
+
+end Test1

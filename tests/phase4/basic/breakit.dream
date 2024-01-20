@@ -1,0 +1,34 @@
+class breakit is
+  mov: int
+  x: int
+  y: int
+  
+  start() is
+  begin
+  
+    mov := 12 * in.readint()   ~ Enter 10
+    out.writeint(mov)           ~ 120
+    
+    mov := mov / -1
+    out.writeint(mov)           ~ -120
+    
+    mov := mov * -1
+    out.writeint(mov)           ~ 120
+    
+    if (true) then
+      x := 1
+      loop while not (x > 3)   ~ -1 -2 1 -1 -2 2 -1 -2 3
+        y := 2
+        loop while y > -2
+          y := y - 1
+          if not (y >= 0) then
+            out.writeint(y)
+          end if
+        end loop
+        out.writeint(x)
+        x := x + 1
+      end loop
+    end if
+  end start
+  
+end breakit

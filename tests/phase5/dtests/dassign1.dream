@@ -1,0 +1,72 @@
+~  CAssign1.dream
+~  This program tests assignment, if statements, out.writeint calls
+
+class CAssign1 is
+
+ x: int
+ y: int
+ z: int
+ b1: boolean
+ b2: boolean
+
+  start() is
+  begin
+    x := 5
+    y := x * (8 - x)
+  
+    b1 := true
+    if b1 then
+      out.writeint(1)          ~ 1
+    else
+      out.writeint(0)
+    end if
+  
+    b2 := not false
+    if b2 then
+      out.writeint(1)          ~ 1
+    else
+      out.writeint(0)
+    end if
+  
+    b2 := not (not (y > x) or (y = 15))
+    if b2 then
+      out.writeint(1)
+    else
+      out.writeint(0)           ~ 0
+    end if
+  
+    b1 := true
+    b2 := false
+    if b1 and b2 then
+      out.writeint(1)
+    else
+      out.writeint(0)           ~ 0
+    end if
+  
+    if b1 and b1 then
+      out.writeint(1)           ~ 1
+    else
+      out.writeint(0)
+    end if
+  
+    if b1 or b2 then 
+      out.writeint(1)          ~ 1
+    else
+      out.writeint(0)
+    end if
+  
+    if b2 or b2 then 
+      out.writeint(1)          
+    else
+      out.writeint(0)          ~ 0
+    end if
+  
+    out.writeint(y)       ~ 15
+    out.writeint(x / 2)       ~ 2
+  
+    y := y - x
+    out.writeint(y + 4)       ~ 14
+    out.writeint(-(9 - 5))       ~ -4
+    out.writeint(5 - 2 * 3 + 1) ~ 0
+  end start
+end CAssign1

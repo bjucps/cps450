@@ -1,0 +1,22 @@
+~ Test2.dream
+class Main is 
+  
+  start() is
+  begin
+    if x > 5 then
+      x:= -5 + 5 +
+      z:= not a or c
+
+       
+    end if
+  end start
+
+  m2(a:int; b:string): boolean is
+  a2: boolean
+  a3: int
+  begin
+  
+  end m2       
+  
+
+end Main

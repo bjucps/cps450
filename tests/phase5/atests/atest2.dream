@@ -1,0 +1,85 @@
+~ ATest1.dream
+
+class Employee is
+  age: int
+ 
+  initEmp(newAge: int): Employee is
+  begin
+    age := newAge
+    initEmp := me
+  end initEmp
+
+  getSalary(): int is
+  begin
+    getSalary := age * 1000
+  end getSalary
+  
+  getAge(): int is
+  begin
+    getAge := age
+  end getAge
+
+end Employee
+
+class HourlyEmployee inherits from Employee is
+  hours: int
+  rate: int
+
+  initHEmp(newAge: int; newHours: int; newRate: int): HourlyEmployee is
+  begin
+    initEmp(newAge)
+    hours := newHours
+    rate := newRate
+    initHEmp := me
+  end initHEmp
+
+  getSalary(): int is
+  begin
+    getSalary := hours * rate * me.getAge()
+  end getSalary
+
+end HourlyEmployee
+
+class SalariedEmployee inherits from Employee is
+  salary: int
+  
+  initSEmp(newAge: int; newSalary: int): SalariedEmployee is
+  begin
+    initEmp(newAge)
+    salary := newSalary
+    initSEmp := me
+  end initSEmp
+  
+  getSalary(): int is
+  begin
+    getSalary := salary * getAge()
+  end getSalary
+  
+end SalariedEmployee
+
+class Point is
+  x: int
+  
+end Point
+
+class ATest2 is
+
+  start() is
+    emp: Employee
+    sEmp: SalariedEmployee
+    p: Point
+    o: Oyd
+  begin
+    emp := (new Employee).initEmp(30)
+    out.writeint(emp.getSalary())
+    
+    o := (new SalariedEmployee).initSEmp(30, 100)
+    emp := o  ~ Should be permitted
+    out.writeint(emp.getSalary())
+    
+    o := new Point
+    emp := o  ~ Should cause runtime type error
+    out.writeint(emp.getSalary())
+  end start
+
+end ATest2

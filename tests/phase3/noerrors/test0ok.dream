@@ -1,0 +1,30 @@
+~ test0.f
+~ Tests scalar type checking with assignment stmts
+
+class test0 is
+
+  b1: boolean
+  b2: boolean
+  
+  b3: boolean
+  
+  i1: int
+  i2: int
+
+  start() is
+  begin
+  
+    b1 := true
+    b2 := not b1 and true
+    b3 := i1 > i2
+    b2 := false
+    b3 := b1 or true
+  
+    i1 := 10
+    i1 := 10 * i2 - i1
+    i1 := 0 + (3 - 4) * -1
+    i1 := 10 + i2 - i1
+    
+  end start
+
+end test0

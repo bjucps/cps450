@@ -1,0 +1,25 @@
+~ Test2.dream
+class Main is 
+  ~ Attributes
+  
+  start() is
+  begin
+    ~ Test line continuation character
+    if not (s = "") _
+       and not (t = 26) then
+       
+        x := new Frog
+        x := x.hi() 
+        x := (new Frog).init()
+       
+    end if
+  end start
+
+  m2(a:int): boolean is
+  a2: boolean
+  begin
+  
+  end m2       
+  
+
+end Main
