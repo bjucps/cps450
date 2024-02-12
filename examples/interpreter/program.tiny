@@ -1,0 +1,8 @@
+BEGIN
+  x := 2
+  READ x
+  y := 5
+  z := 2
+  y := 3 + x * y - z
+  WRITE x, y, x + y
+END
