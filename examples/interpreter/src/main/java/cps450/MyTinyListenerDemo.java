@@ -9,11 +9,6 @@ public class MyTinyListenerDemo extends TinyBaseListener {
 	
 
 	@Override
-	public void enterStmt(StmtContext ctx) {
-		System.out.println("Entered statement: " + ctx.getText());
-	}
-
-	@Override
 	public void enterAssign_stmt(Assign_stmtContext ctx) {
 		System.out.println("Entered assignment statement: " + ctx.getText());
 		Token idToken = ctx.ID().getSymbol();

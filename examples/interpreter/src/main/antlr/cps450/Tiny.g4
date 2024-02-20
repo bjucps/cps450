@@ -42,9 +42,9 @@ stmt_list
    ;
 
 stmt
-   : assign_stmt 
-   | read_stmt   
-   | write_stmt  
+   : assign_stmt # AsmtStmt
+   | read_stmt   # ReadStmt
+   | write_stmt  # WriteStmt 
    ;
 
 assign_stmt
