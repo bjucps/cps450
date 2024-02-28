@@ -1,0 +1,11 @@
+class Demo is
+  x: int
+  y: int  
+  
+  start()
+  begin
+    x := 5
+    y := 3 + x
+    out.writeint(x)  
+  end start
+end Demo

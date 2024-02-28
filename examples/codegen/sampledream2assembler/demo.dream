@@ -1,0 +1,11 @@
+class Prog is
+    x: int
+    y: int
+
+    start() is
+    begin
+        x := 3
+        y := 5 + x
+        out.writeint(y-x)
+    end start
+end Prog

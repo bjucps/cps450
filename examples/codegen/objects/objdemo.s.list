@@ -1,0 +1,312 @@
+   1              		.file	"objdemo.cpp"
+   2              		.stabs	"objdemo.cpp",100,0,4,.Ltext0
+   3              		.text
+   4              	.Ltext0:
+   5              		.stabs	"gcc2_compiled.",60,0,0,0
+   6              		.stabs	"__builtin_va_list:t(0,1)=*(0,2)=r(0,2);0;127;",128,0,0,0
+   7              		.stabs	"complex long double:t(0,3)=R3;24;0;",128,0,0,0
+   8              		.stabs	"complex double:t(0,4)=R3;16;0;",128,0,0,0
+   9              		.stabs	"complex float:t(0,5)=R3;8;0;",128,0,0,0
+  10              		.stabs	"complex int:t(0,6)=s8real:(0,7)=r(0,7);-2147483648;2147483647;,0,32;imag:(0,7),32,32;;",12
+  11              		.stabs	"long long unsigned int:t(0,8)=r(0,8);0;-1;",128,0,0,0
+  12              		.stabs	"unsigned int:t(0,9)=r(0,9);0;-1;",128,0,0,0
+  13              		.stabs	"short unsigned int:t(0,10)=r(0,10);0;65535;",128,0,0,0
+  14              		.stabs	"unsigned char:t(0,11)=r(0,11);0;255;",128,0,0,0
+  15              		.stabs	"long long int:t(0,12)=r(0,12);0;-1;",128,0,0,0
+  16              		.stabs	"int:t(0,7)",128,0,0,0
+  17              		.stabs	"short int:t(0,13)=r(0,13);-32768;32767;",128,0,0,0
+  18              		.stabs	"signed char:t(0,14)=r(0,14);-128;127;",128,0,0,0
+  19              		.stabs	"char:t(0,2)",128,0,0,0
+  20              		.stabs	"signed:t(0,7)",128,0,0,0
+  21              		.stabs	"long int:t(0,15)=r(0,15);-2147483648;2147483647;",128,0,0,0
+  22              		.stabs	"long unsigned int:t(0,16)=r(0,16);0;-1;",128,0,0,0
+  23              		.stabs	"unsigned long:t(0,16)",128,0,0,0
+  24              		.stabs	"long long unsigned:t(0,8)",128,0,0,0
+  25              		.stabs	"unsigned short:t(0,10)",128,0,0,0
+  26              		.stabs	"float:t(0,17)=r(0,7);4;0;",128,0,0,0
+  27              		.stabs	"double:t(0,18)=r(0,7);8;0;",128,0,0,0
+  28              		.stabs	"long double:t(0,19)=r(0,7);12;0;",128,0,0,0
+  29              		.stabs	"void:t(0,20)=(0,20)",128,0,0,0
+  30              		.stabs	"wchar_t:t(0,21)=r(0,21);-2147483648;2147483647;",128,0,0,0
+  31              		.stabs	"bool:t(0,22)=eFalse:0,True:1,;",128,0,0,0
+  32              		.stabs	"__vtbl_ptr_type:t(0,23)=*(0,24)=f(0,7)",128,0,0,0
+  33              		.stabs	"Point:T(0,25)=s8x:(0,7),0,32;y:(0,7),32,32;;",128,0,0,0
+  34              		.stabs	"Point:t(0,25)",128,0,0,0
+  35              		.align 2
+  36              		.stabs	"_ZN5Point4setXEi:F(0,20)",36,0,0,_ZN5Point4setXEi
+  37              		.stabs	"this:p(0,26)=*(0,25)",160,0,0,8
+  38              		.stabs	"newX:p(0,7)",160,0,0,12
+  39              	.globl _ZN5Point4setXEi
+  40              		.type	_ZN5Point4setXEi, @function
+  41              	_ZN5Point4setXEi:
+   1:objdemo.cpp   **** class Point {
+   2:objdemo.cpp   **** private:
+   3:objdemo.cpp   ****     int x, y;
+   4:objdemo.cpp   **** 
+   5:objdemo.cpp   **** public:
+   6:objdemo.cpp   ****     void setX(int newX);    
+   7:objdemo.cpp   ****     int getX();
+   8:objdemo.cpp   ****     
+   9:objdemo.cpp   ****     void setY(int newY);
+  10:objdemo.cpp   ****     int getY();
+  11:objdemo.cpp   ****     
+  12:objdemo.cpp   **** };
+  13:objdemo.cpp   **** 
+  14:objdemo.cpp   **** void Point::setX(int newX) {
+  42              		.stabn	68,0,14,.LM0-_ZN5Point4setXEi
+  43              	.LM0:
+  44              	.LFB2:
+  45 0000 55       		pushl	%ebp
+  46              	.LCFI0:
+  47 0001 89E5     		movl	%esp, %ebp
+  48              	.LCFI1:
+  15:objdemo.cpp   ****         x = newX;
+  49              		.stabn	68,0,15,.LM1-_ZN5Point4setXEi
+  50              	.LM1:
+  51 0003 8B5508   		movl	8(%ebp), %edx
+  52 0006 8B450C   		movl	12(%ebp), %eax
+  53 0009 8902     		movl	%eax, (%edx)
+  16:objdemo.cpp   **** }
+  54              		.stabn	68,0,16,.LM2-_ZN5Point4setXEi
+  55              	.LM2:
+  56 000b 5D       		popl	%ebp
+  57 000c C3       		ret
+  58              	.LFE2:
+  59              		.size	_ZN5Point4setXEi, .-_ZN5Point4setXEi
+  60              	.globl __gxx_personality_v0
+  61              	.Lscope0:
+  62 000d 90       		.align 2
+  63              		.stabs	"_ZN5Point4getXEv:F(0,7)",36,0,0,_ZN5Point4getXEv
+  64              		.stabs	"this:p(0,26)",160,0,0,8
+  65              	.globl _ZN5Point4getXEv
+  66              		.type	_ZN5Point4getXEv, @function
+  67              	_ZN5Point4getXEv:
+  17:objdemo.cpp   **** 
+  18:objdemo.cpp   **** int Point::getX() { 
+  68              		.stabn	68,0,18,.LM3-_ZN5Point4getXEv
+  69              	.LM3:
+  70              	.LFB3:
+  71 000e 55       		pushl	%ebp
+  72              	.LCFI2:
+  73 000f 89E5     		movl	%esp, %ebp
+  74              	.LCFI3:
+  19:objdemo.cpp   ****     return x; 
+  75              		.stabn	68,0,19,.LM4-_ZN5Point4getXEv
+  76              	.LM4:
+  77 0011 8B4508   		movl	8(%ebp), %eax
+  78 0014 8B00     		movl	(%eax), %eax
+  20:objdemo.cpp   **** }
+  79              		.stabn	68,0,20,.LM5-_ZN5Point4getXEv
+  80              	.LM5:
+  81 0016 5D       		popl	%ebp
+  82 0017 C3       		ret
+  83              	.LFE3:
+  84              		.size	_ZN5Point4getXEv, .-_ZN5Point4getXEv
+  85              	.Lscope1:
+  86              		.align 2
+  87              		.stabs	"_ZN5Point4setYEi:F(0,20)",36,0,0,_ZN5Point4setYEi
+  88              		.stabs	"this:p(0,26)",160,0,0,8
+  89              		.stabs	"newY:p(0,7)",160,0,0,12
+  90              	.globl _ZN5Point4setYEi
+  91              		.type	_ZN5Point4setYEi, @function
+  92              	_ZN5Point4setYEi:
+  21:objdemo.cpp   **** 
+  22:objdemo.cpp   **** void Point::setY(int newY) {
+  93              		.stabn	68,0,22,.LM6-_ZN5Point4setYEi
+  94              	.LM6:
+  95              	.LFB4:
+  96 0018 55       		pushl	%ebp
+  97              	.LCFI4:
+  98 0019 89E5     		movl	%esp, %ebp
+  99              	.LCFI5:
+  23:objdemo.cpp   ****         y = newY;
+ 100              		.stabn	68,0,23,.LM7-_ZN5Point4setYEi
+ 101              	.LM7:
+ 102 001b 8B5508   		movl	8(%ebp), %edx
+ 103 001e 8B450C   		movl	12(%ebp), %eax
+ 104 0021 894204   		movl	%eax, 4(%edx)
+  24:objdemo.cpp   **** }
+ 105              		.stabn	68,0,24,.LM8-_ZN5Point4setYEi
+ 106              	.LM8:
+ 107 0024 5D       		popl	%ebp
+ 108 0025 C3       		ret
+ 109              	.LFE4:
+ 110              		.size	_ZN5Point4setYEi, .-_ZN5Point4setYEi
+ 111              	.Lscope2:
+ 112              		.align 2
+ 113              		.stabs	"_ZN5Point4getYEv:F(0,7)",36,0,0,_ZN5Point4getYEv
+ 114              		.stabs	"this:p(0,26)",160,0,0,8
+ 115              	.globl _ZN5Point4getYEv
+ 116              		.type	_ZN5Point4getYEv, @function
+ 117              	_ZN5Point4getYEv:
+  25:objdemo.cpp   **** 
+  26:objdemo.cpp   **** int Point::getY() { 
+ 118              		.stabn	68,0,26,.LM9-_ZN5Point4getYEv
+ 119              	.LM9:
+ 120              	.LFB5:
+ 121 0026 55       		pushl	%ebp
+ 122              	.LCFI6:
+ 123 0027 89E5     		movl	%esp, %ebp
+ 124              	.LCFI7:
+  27:objdemo.cpp   ****     return y; 
+ 125              		.stabn	68,0,27,.LM10-_ZN5Point4getYEv
+ 126              	.LM10:
+ 127 0029 8B4508   		movl	8(%ebp), %eax
+ 128 002c 8B4004   		movl	4(%eax), %eax
+  28:objdemo.cpp   **** }
+ 129              		.stabn	68,0,28,.LM11-_ZN5Point4getYEv
+ 130              	.LM11:
+ 131 002f 5D       		popl	%ebp
+ 132 0030 C3       		ret
+ 133              	.LFE5:
+ 134              		.size	_ZN5Point4getYEv, .-_ZN5Point4getYEv
+ 135              	.Lscope3:
+ 136 0031 90       		.align 2
+ 137              		.stabs	"main:F(0,7)",36,0,0,main
+ 138              	.globl main
+ 139              		.type	main, @function
+ 140              	main:
+  29:objdemo.cpp   **** 
+  30:objdemo.cpp   **** 
+  31:objdemo.cpp   **** int main()
+ 141              		.stabn	68,0,31,.LM12-main
+ 142              	.LM12:
+ 143              	.LFB6:
+ 144 0032 8D4C2404 		leal	4(%esp), %ecx
+ 145              	.LCFI8:
+ 146 0036 83E4F0   		andl	$-16, %esp
+ 147 0039 FF71FC   		pushl	-4(%ecx)
+ 148              	.LCFI9:
+ 149 003c 55       		pushl	%ebp
+ 150              	.LCFI10:
+ 151 003d 89E5     		movl	%esp, %ebp
+ 152              	.LCFI11:
+ 153 003f 51       		pushl	%ecx
+ 154              	.LCFI12:
+ 155 0040 83EC24   		subl	$36, %esp
+ 156              	.LCFI13:
+ 157              	.LBB2:
+  32:objdemo.cpp   **** {
+  33:objdemo.cpp   ****     Point *a = new Point();
+ 158              		.stabn	68,0,33,.LM13-main
+ 159              	.LM13:
+ 160 0043 C7042408 		movl	$8, (%esp)
+ 160      000000
+ 161 004a E8FCFFFF 		call	_Znwj
+ 161      FF
+ 162 004f C7000000 		movl	$0, (%eax)
+ 162      0000
+ 163 0055 C7400400 		movl	$0, 4(%eax)
+ 163      000000
+ 164 005c 8945F4   		movl	%eax, -12(%ebp)
+  34:objdemo.cpp   ****     Point *b = new Point();
+ 165              		.stabn	68,0,34,.LM14-main
+ 166              	.LM14:
+ 167 005f C7042408 		movl	$8, (%esp)
+ 167      000000
+ 168 0066 E8FCFFFF 		call	_Znwj
+ 168      FF
+ 169 006b C7000000 		movl	$0, (%eax)
+ 169      0000
+ 170 0071 C7400400 		movl	$0, 4(%eax)
+ 170      000000
+ 171 0078 8945F8   		movl	%eax, -8(%ebp)
+  35:objdemo.cpp   ****     
+  36:objdemo.cpp   ****     a->setX(25);
+ 172              		.stabn	68,0,36,.LM15-main
+ 173              	.LM15:
+ 174 007b C7442404 		movl	$25, 4(%esp)
+ 174      19000000 
+ 175 0083 8B45F4   		movl	-12(%ebp), %eax
+ 176 0086 890424   		movl	%eax, (%esp)
+ 177 0089 E8FCFFFF 		call	_ZN5Point4setXEi
+ 177      FF
+  37:objdemo.cpp   ****     b->setX(35);
+ 178              		.stabn	68,0,37,.LM16-main
+ 179              	.LM16:
+ 180 008e C7442404 		movl	$35, 4(%esp)
+ 180      23000000 
+ 181 0096 8B45F8   		movl	-8(%ebp), %eax
+ 182 0099 890424   		movl	%eax, (%esp)
+ 183 009c E8FCFFFF 		call	_ZN5Point4setXEi
+ 183      FF
+ 184              	.LBE2:
+ 185 00a1 B8000000 		movl	$0, %eax
+ 185      00
+  38:objdemo.cpp   ****     
+  39:objdemo.cpp   **** }
+ 186              		.stabn	68,0,39,.LM17-main
+ 187              	.LM17:
+ 188 00a6 83C424   		addl	$36, %esp
+ 189 00a9 59       		popl	%ecx
+ 190 00aa 5D       		popl	%ebp
+ 191 00ab 8D61FC   		leal	-4(%ecx), %esp
+ 192 00ae C3       		ret
+ 193              	.LFE6:
+ 194              		.size	main, .-main
+ 195              		.stabs	"a:(0,26)",128,0,0,-12
+ 196              		.stabs	"b:(0,26)",128,0,0,-8
+ 197              		.stabn	192,0,0,.LBB2-main
+ 198              		.stabn	224,0,0,.LBE2-main
+ 199              	.Lscope4:
+ 200              		.section	.eh_frame,"a",@progbits
+ 201              	.Lframe1:
+ 202 0000 18000000 		.long	.LECIE1-.LSCIE1
+ 203              	.LSCIE1:
+ 204 0004 00000000 		.long	0x0
+ 205 0008 01       		.byte	0x1
+ 206 0009 7A5000   		.string	"zP"
+ 207 000c 01       		.uleb128 0x1
+ 208 000d 7C       		.sleb128 -4
+ 209 000e 08       		.byte	0x8
+ 210 000f 05       		.uleb128 0x5
+ 211 0010 00       		.byte	0x0
+ 212 0011 00000000 		.long	__gxx_personality_v0
+ 213 0015 0C       		.byte	0xc
+ 214 0016 04       		.uleb128 0x4
+ 215 0017 04       		.uleb128 0x4
+ 216 0018 88       		.byte	0x88
+ 217 0019 01       		.uleb128 0x1
+ 218 001a 0000     		.align 4
+ 219              	.LECIE1:
+ 220              	.LSFDE9:
+ 221 001c 24000000 		.long	.LEFDE9-.LASFDE9
+ 222              	.LASFDE9:
+ 223 0020 20000000 		.long	.LASFDE9-.Lframe1
+ 224 0024 32000000 		.long	.LFB6
+ 225 0028 7D000000 		.long	.LFE6-.LFB6
+ 226 002c 00       		.uleb128 0x0
+ 227 002d 44       		.byte	0x4
+ 228              		.long	.LCFI8-.LFB6
+ 229 002e 0C       		.byte	0xc
+ 230 002f 01       		.uleb128 0x1
+ 231 0030 00       		.uleb128 0x0
+ 232 0031 09       		.byte	0x9
+ 233 0032 04       		.uleb128 0x4
+ 234 0033 01       		.uleb128 0x1
+ 235 0034 46       		.byte	0x4
+ 236              		.long	.LCFI9-.LCFI8
+ 237 0035 0C       		.byte	0xc
+ 238 0036 04       		.uleb128 0x4
+ 239 0037 04       		.uleb128 0x4
+ 240 0038 41       		.byte	0x4
+ 241              		.long	.LCFI10-.LCFI9
+ 242 0039 0E       		.byte	0xe
+ 243 003a 08       		.uleb128 0x8
+ 244 003b 85       		.byte	0x85
+ 245 003c 02       		.uleb128 0x2
+ 246 003d 42       		.byte	0x4
+ 247              		.long	.LCFI11-.LCFI10
+ 248 003e 0D       		.byte	0xd
+ 249 003f 05       		.uleb128 0x5
+ 250 0040 41       		.byte	0x4
+ 251              		.long	.LCFI12-.LCFI11
+ 252 0041 84       		.byte	0x84
+ 253 0042 03       		.uleb128 0x3
+ 254 0043 00       		.align 4
+ 255              	.LEFDE9:
+ 256              		.text
+ 257              		.stabs	"",100,0,0,.Letext0
+ 258              	.Letext0:
+ 259              		.ident	"GCC: (GNU) 4.1.1 20061011 (Red Hat 4.1.1-30)"
+ 260              		.section	.note.GNU-stack,"",@progbits

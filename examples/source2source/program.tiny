@@ -1,0 +1,8 @@
+BEGIN
+  x := 5
+  WRITE x
+  READ y
+  y := x - 10
+  z := -5
+  WRITE x, y, z + y + x - 456
+END

@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'antlr'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'cps450.Main'
+}
+
+dependencies {
+    antlr "org.antlr:antlr4:4.7.2"
+    testImplementation 'junit:junit:4.12'
+}
+
+generateGrammarSource {
+    arguments += ["-package", "cps450"]
+}

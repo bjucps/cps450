@@ -1,0 +1,385 @@
+~ ---------------------------------------------------------
+~ File: stdlib.dream
+~ An implementation of the Dream Predefined classes
+~ ---------------------------------------------------------
+
+class Oyd is
+
+  toString(): string is
+  begin
+    toString := "none"
+  end toString
+
+end Oyd
+
+~ ********************************************
+~  CharNode is used internally by the String class
+~ ********************************************
+
+class CharNode is
+  char: int
+  next: CharNode
+  
+  init(initChar: int): CharNode is
+  begin
+    char := initChar
+    next := null
+    init := me
+  end init
+  
+  getChar(): int is
+  begin
+    getChar := char
+  end getChar
+  
+  getNext(): CharNode is
+  begin
+    getNext := next
+  end getNext
+  
+  setNext(node: CharNode) is
+  begin
+    next := node
+  end setNext
+  
+end CharNode
+
+~ ********************************************
+~ An implementation of the standard String class
+~ Uses a linked list of CharNodes to hold the characters
+~ ********************************************
+
+class String is
+
+  charlist: CharNode
+  
+  ~ 
+  ~  these methods intended for use within the String class only
+  ~ 
+
+  appendChar(char: int): String is
+    curnode: CharNode
+    node: CharNode
+  begin
+    node := (new CharNode).init(char)
+    
+    if charlist = null then
+      charlist := node
+    else
+      curnode := charlist
+      loop while not (curnode.getNext() = null)
+        curnode := curnode.getNext()
+      end loop
+      curnode.setNext(node)
+    end if
+    appendChar := me
+  end appendChar
+  
+  catIntHelper(num: int; str: String) is
+    digit: int
+  begin
+    digit := num - (num / 10)* 10  ~ compute num mod 10
+    if num / 10 > 0 then
+      catIntHelper(num / 10, str)
+    end if
+    str.appendChar(digit + 48)      
+  end catIntHelper
+    
+  getCharlist(): CharNode is
+  begin
+    getCharlist := charlist
+  end getCharlist
+    
+  ~ 
+  ~  these methods are for public consumption
+  ~ 
+  
+  ~ returns a copy of this String
+  copy(): String is
+    newstr: String
+    curNode: CharNode
+  begin
+    newstr := new String 
+    
+    curNode := charlist
+    loop while not (curNode = null)
+      newstr.appendChar(curNode.getChar())
+      curNode := curNode.getNext()
+    end loop
+    
+    copy := newstr
+  end copy  
+    
+  ~ returns a new String containing this String concatenated with <str> 
+  cat(str: String): String is
+    newstr: String
+    curNode: CharNode
+  begin
+    ~ first, make a copy of this String
+    newstr := copy()    
+        
+    ~ now, append all the chars in str to newstr
+    curNode := str.getCharlist()
+    loop while not (curNode = null)
+      newstr.appendChar(curNode.getChar())
+      curNode := curNode.getNext()
+    end loop
+    
+    cat := newstr
+  
+  end cat
+    
+  ~ returns a new String containing this String concatenated with the character <ch> 
+  catChar(ch: int): String is
+    newstr: String
+  begin
+    newstr := copy()
+    
+    newstr.appendChar(ch)
+    
+    catChar := newstr
+  end catChar
+  
+  ~ returns a new String containing this String concatenated with the ASCII representation of <num> 
+  catInt(num: int): String is  
+    result: String
+    i: int
+    
+  begin        
+    if not (num = 0) then
+      result := new String    
+
+      if (0 > num) then
+        result.catChar(45) ~ minus sign
+        num := -num
+      end if
+
+      ~ Append digits to result
+      catIntHelper(num, result)
+      
+    else
+      result := (new String).catChar(48) ~ 0
+    end if
+    
+    catInt := cat(result)
+    
+  end catInt
+
+  ~ returns character at position <index> in this String, or -1 if <index> is out of bounds
+  charAt(index: int): int is
+    curNode: CharNode
+  begin
+    curNode := charlist
+    loop while index > 0 and not (curNode = null)
+      index := index - 1
+      curNode := curNode.getNext()
+    end loop
+    
+    if not (curNode = null) then
+      charAt := curNode.getChar()
+    else
+      charAt := -1
+    end if
+  end charAt
+  
+  ~ returns the number of characters in this String
+  length(): int is
+    i: int
+    curNode: CharNode
+  begin
+    curNode := charlist
+    i := 0
+    loop while not (curNode = null)
+      i := i + 1
+      curNode := curNode.getNext()
+    end loop
+    length := i
+  end length
+  
+  ~ returns true if this string is lexicographically equal to <str>
+  eq(str: String): boolean is
+    i: int
+    len: int
+  begin
+    len := length()
+    if not (len = str.length()) then
+      eq := false
+    else
+      i := 0
+      loop while not (i >= len) and (charAt(i) = str.charAt(i))
+        i := i + 1
+      end loop
+      eq := (i = len)
+    end if
+  end eq
+  
+  gt(str: String): boolean is
+    i: int
+    len: int
+  begin
+    len := length()
+    i := 0
+    loop while not (i >= len) and not (i >= str.length()) and (charAt(i) = str.charAt(i))
+      i := i + 1
+    end loop
+    if (i >= len) or (i >= str.length()) then
+      gt := len > str.length()
+    else
+      gt := (charAt(i) > str.charAt(i))
+    end if
+
+  end gt
+  
+  gteq(str: String): boolean is
+  begin
+    gteq := gt(str) or eq(str)  ~ not efficient, but works...
+  end gteq
+  
+  ~ Override toString method
+  toString(): string is
+  begin
+    toString := me
+  end toString
+
+  
+end String
+
+
+~ ********************************************
+~ An implementation of the standard Reader class
+~
+~ This implementation depends on the existence of 
+~ an external function in the runtime support library:
+~  int io_read( )
+~ ********************************************
+
+class Reader is 
+
+  ~ Read a line from stdin and return it
+  readline(): String is
+    char: int
+    s: String
+  begin
+    s := new String
+    
+    char := io_read() ~ externally implemented method
+    loop while not (char = 10)
+      if not (char = 13) then
+        s.appendChar(char)
+      end if
+      char := io_read()
+    end loop
+    
+    readline := s
+    
+  end readline
+  
+  ~ Reads a line from stdin, converts to int, returns it
+  ~ Returns -1 if line is empty
+  ~ Returns junk if line contains non-numeric data
+  readint(): int is
+    s: String
+    i: int
+    num: int
+    len: int
+    mult: int
+  begin
+    s := readline()
+    if s.length() > 0 then
+      if s.charAt(0) = 45 then  ~ - sign
+        mult := -1
+        i := 1
+      else
+        mult := 1
+        i := 0
+      end if
+
+      num := 0
+      len := s.length()
+      loop while not (i >= len)
+        num := num * 10 + (s.charAt(i) - 48)
+        i := i + 1
+      end loop
+      
+      readint := num * mult
+    else
+      readint := -1
+    end if
+  end readint
+
+end Reader
+
+
+~ ********************************************
+~ An implementation of the standard Writer class
+~
+~ This implementation depends on the existence of 
+~ an external function in the runtime support library:
+~  void io_write( )
+~ ********************************************
+
+class Writer is
+
+  ~ writes <char> to stdout 
+  writechar(char: int): Writer is
+  begin
+    io_write(char) 
+    writechar := me
+  end writechar
+
+
+  ~ internal method used by writeint
+  writeintHelper(num: int) is
+    digit: int
+  begin
+    digit := num - (num / 10)* 10  ~ compute num mod 10
+    if num / 10 > 0 then
+      writeintHelper(num / 10)
+    end if
+    io_write(digit + 48)      
+  end writeintHelper
+
+  ~ writes <num> to stdout. uses recursion but no Strings
+  writeint(num: int): Writer is
+  begin
+    if (num = 0) then
+      io_write(48)
+    else
+      if not (num >= 0) then
+        io_write(45) ~ - symbol
+        num := -num
+      end if
+      writeintHelper(num)
+    end if
+    
+    io_write(13)
+    io_write(10)
+    
+    writeint := me
+  end writeint
+    
+  ~ writes <str> to stdout
+  write(str: String): Writer is
+    i: int
+    len: int
+  begin
+    len := str.length()
+    i := 0
+    loop while not (i >= len) 
+      io_write(str.charAt(i))
+      i := i + 1
+    end loop
+    
+    write := me
+  end write
+  
+  ~ writes <str> to stdout, followed by newline
+  writeln(str: String): Writer is
+  begin
+    write(str)
+    io_write(13)
+    io_write(10)
+    writeln := me
+  end writeln    
+
+end Writer

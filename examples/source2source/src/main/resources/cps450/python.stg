@@ -1,0 +1,40 @@
+program(prog) ::= <<
+#
+# Output program
+#
+
+<prog.stmt_list:{stmt|<doStmt(stmt)>}> <! Iterate over statements !>
+
+>>
+
+doStmt(aStmt) ::= <%
+<if(aStmt.astmt)>
+	<aStmt.astmt.id.text> = <(aStmt.astmt.exp.class.simpleName)(aStmt.astmt.exp)>
+<elseif(aStmt.wstmt)>
+	print(<aStmt.wstmt.expList.exprList:{expr|<(expr.class.simpleName)(expr)>}; separator=", ">)
+<elseif(aStmt.rstmt)>
+	<aStmt.rstmt.ids.idList:{id|<id.text> = input("Enter <id.text>:")}; separator="\n">
+<endif>
+<\n><! Force a newline !>
+%>
+
+TermExprContext(anExpr) ::= <%
+  <(anExpr.te.class.simpleName)(anExpr.te)>
+%>
+  
+AddExprContext(anExpr)  ::= <%
+  <(anExpr.e1.class.simpleName)(anExpr.e1)> <anExpr.op.text> <(anExpr.e2.class.simpleName)(anExpr.e2)>
+%>
+
+IntTermContext(intTerm) ::= <%
+  <intTerm.anInt.text>
+%>
+
+IdTermContext(idTerm)   ::= <%
+  <idTerm.id.text>
+%>
+
+ParTermContext(parTerm) ::= <%
+  (<(parTerm.e.class.simpleName)(parTerm.e)>)
+%> 
+
