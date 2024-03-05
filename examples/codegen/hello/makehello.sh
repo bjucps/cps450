@@ -1,2 +1,2 @@
-gcc -g -m32 hello.s -ohello
+gcc -g -m32 hello.s -obin/hello
 
