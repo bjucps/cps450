@@ -2,7 +2,7 @@
 # Line 2: x: int
 	.comm	x,4,4
 
-# Line 3: x: int
+# Line 3: y: int
 	.comm	y,4,4
 	
 	.text

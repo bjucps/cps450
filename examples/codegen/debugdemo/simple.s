@@ -39,13 +39,9 @@ main:
 	pushl	%ebp
 	movl	%esp, %ebp
 	.cfi_escape 0x10,0x5,0x2,0x75,0
-	pushl	%ebx
 	pushl	%ecx
-	.cfi_escape 0xf,0x3,0x75,0x78,0x6
-	.cfi_escape 0x10,0x3,0x2,0x75,0x7c
-	subl	$16, %esp
-	call	__x86.get_pc_thunk.ax
-	addl	$_GLOBAL_OFFSET_TABLE_, %eax
+	.cfi_escape 0xf,0x3,0x75,0x7c,0x6
+	subl	$20, %esp
 	.stabn	68,0,7,.LM1-.LFBB1
 .LM1:
 	movl	$10, -20(%ebp)
@@ -57,20 +53,18 @@ main:
 	movl	$8, -12(%ebp)
 	.stabn	68,0,11,.LM4-.LFBB1
 .LM4:
-	movl	$5, x@GOTOFF(%eax)
+	movl	$5, x
 	.stabn	68,0,12,.LM5-.LFBB1
 .LM5:
-	movl	$10, y@GOTOFF(%eax)
+	movl	$10, y
 	.stabn	68,0,14,.LM6-.LFBB1
 .LM6:
-	movl	x@GOTOFF(%eax), %edx
+	movl	x, %eax
 	subl	$4, %esp
 	pushl	-20(%ebp)
-	pushl	%edx
-	leal	.LC0@GOTOFF(%eax), %edx
-	pushl	%edx
-	movl	%eax, %ebx
-	call	printf@PLT
+	pushl	%eax
+	pushl	$.LC0
+	call	printf
 	addl	$16, %esp
 	.stabs	"<built-in>",132,0,0,.Ltext1
 .Ltext1:
@@ -81,13 +75,9 @@ main:
 .Ltext2:
 	.stabn	68,0,15,.LM8-.LFBB1
 .LM8:
-	leal	-8(%ebp), %esp
-	popl	%ecx
-	.cfi_restore 1
+	movl	-4(%ebp), %ecx
 	.cfi_def_cfa 1, 0
-	popl	%ebx
-	.cfi_restore 3
-	popl	%ebp
+	leave
 	.cfi_restore 5
 	leal	-4(%ecx), %esp
 	.cfi_def_cfa 4, 4
@@ -101,18 +91,6 @@ main:
 	.stabn	192,0,0,.LFBB1-.LFBB1
 	.stabn	224,0,0,.Lscope1-.LFBB1
 .Lscope1:
-	.section	.text.__x86.get_pc_thunk.ax,"axG",@progbits,__x86.get_pc_thunk.ax,comdat
-	.globl	__x86.get_pc_thunk.ax
-	.hidden	__x86.get_pc_thunk.ax
-	.type	__x86.get_pc_thunk.ax, @function
-__x86.get_pc_thunk.ax:
-.LFB1:
-	.cfi_startproc
-	movl	(%esp), %eax
-	ret
-	.cfi_endproc
-.LFE1:
-	.text
 	.stabs	"",100,0,0,.Letext0
 .Letext0:
 	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
