@@ -1,0 +1,11 @@
+point { x: 5, y: 10 }
+
+line { x: 5, y: 10, width: 20, height: 30 }
+
+circle { 
+  x: 5, 
+  y: 15, 
+  radius: 25 
+}
+
+text { x: 5, y: 20, font: 'helvetica', value: 'What is for breakfast?' }

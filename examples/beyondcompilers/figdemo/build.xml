@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project default="generate_scanner_parser" basedir=".">
+    <property name="grammar.file" value="figlang.scc"/>
+
+    <taskdef name="sablecc" classname="org.sablecc.ant.taskdef.Sablecc"
+        classpath="C:\Programs\sablecc-3.2\lib\sablecc-anttask.jar;C:\Programs\sablecc-3.2\lib\sablecc.jar" />
+        
+    <target name="generate_scanner_parser" depends="clean">
+        <mkdir dir="gen-src"/>
+        <sablecc src="src" includes="${grammar.file}" 
+                 outputdirectory="gen-src" /> 
+
+    </target>
+
+    <target name="clean">
+        <delete dir="gen-src"/>
+    </target>
+</project>

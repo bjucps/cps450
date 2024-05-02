@@ -1,0 +1,44 @@
+Package figlang;
+
+Helpers
+  letter = ['A'..'Z'] | ['a'..'z'];
+  single_quote = 39;
+  digit = ['0'..'9'];
+  printable = [[32..127] - 39];
+  lf = 10;
+  cr = 13;
+  tab = 9;
+
+
+Tokens
+  l_bracket = '{';
+  r_bracket = '}';
+  comma = ',';
+  colon = ':';
+  
+  id = letter+;
+  intlit = '-'? digit+;
+  
+  strlit = single_quote printable* single_quote;
+  
+  eol = lf | cr lf;
+  blank = ' ' | tab;
+  
+Ignored Tokens
+  blank, eol;
+  
+Productions
+  start = figure+;
+  
+  figure = id l_bracket attr_list r_bracket;
+  
+  attr_list = {comma} attribute comma attr_list
+            | {single} attribute;
+            
+  attribute = id colon literal;
+  
+  literal = {int} intlit 
+          | {str} strlit;
+  
+
+ 
