@@ -4,22 +4,26 @@ This project contains a demonstration scanner for a small ANTLR grammar.
 
 ## Install and Run
 
-To build this project, execute:
+### To build this project, execute:
 
 ```
-gradlew install
+./gradlew install
 ```
 
-To execute unit tests, execute:
+### To execute unit tests, execute:
 
 ```
-gradlew test
+./gradlew test
 ```
 
-To run this project, execute:
+### To run this project, execute:
 
 ```
 build/install/lexer/bin/lexer math.txt
+```
+or 
+```
+./arun math.txt
 ```
 
 ## Project Structure
