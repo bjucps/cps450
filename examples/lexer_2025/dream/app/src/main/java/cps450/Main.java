@@ -20,7 +20,7 @@ public class Main
 
         System.out.println();
 
-        var stream = Main().getClass().getResourceAsStream(arguments[0]);
+        var stream = (new Main()).getClass().getResourceAsStream(arguments[0]);
         CharStream input = CharStreams.fromStream(stream);
         ArithmeticLexer lexer = new ArithmeticLexer(input);
         
