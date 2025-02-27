@@ -57,7 +57,7 @@ public class TinyInterpreterVisitor extends TinyBaseVisitor<Double> {
 
 	@Override
 	public Double visitInteger(IntegerContext ctx) {
-		return new Double(ctx.getText());
+		return Double.valueOf(ctx.getText());
 	}
 
 
