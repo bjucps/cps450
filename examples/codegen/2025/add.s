@@ -26,6 +26,7 @@ main:						# standard function prologue:
 	addl	%ecx, %edx			# add 6 to 3
 	addl	$48, %edx			# add '0' to sum
 	movl	%edx, -24(%ebp)		# store sum
+	subl	$4, %esp			# prep for call
 								# parameters:
 	pushl	$1					#	3) 1 (number of bytes to write)
 	leal	-24(%ebp), %edx		#	2) Address of '9'
@@ -35,7 +36,7 @@ main:						# standard function prologue:
 	call	write@PLT			# call stub for write:
 								#	 Return value in ax.
 								#	 Address of string in cx.
-	addl	$12, %esp			# remove allocated 24 bytes of stack space -4 for 3 pushes. (12)
+	addl	$16, %esp			# clear parameters back off stack
 	movl	$0, %eax			# zero out return value.
 	leal	-8(%ebp), %esp		# restore original sp+4 to sp
 	popl	%ecx				# retrieve sp + 4 (see ln 9)

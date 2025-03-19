@@ -17,7 +17,7 @@ main:						# standard function prologue:
 	pushl	%ecx			# push sp+4
 	call	__x86.get_pc_thunk.ax			# put ip in ax. See https://courses.cs.vt.edu/cs3214/spring2022/questions/pcmaterialization		
 	addl	$_GLOBAL_OFFSET_TABLE_, %eax	# set ax to _GLOBAL_OFFSET_TABLE_ + ip of <main+23>
-	subl	$4, %esp						# reserve space on the stack. Stack grows down.
+	subl	$4, %esp					# prep for call
 										# parameters:
 	pushl	$3							# 3) 3  (number of bytes to write)
 	leal	hello@GOTOFF(%eax), %edx	# 2) Address of hello
@@ -27,7 +27,7 @@ main:						# standard function prologue:
 	call	write@PLT			# call stub for write:
 								#	 Return value in ax.
 								#	 Address of string in cx.
-	addl	$16, %esp			# remove allocated 16 bytes of stack space -4 for 3 pushes. (12)
+	addl	$16, %esp			# clear parameters back off stack
 	movl	$0, %eax			# zero out return value.
 	leal	-8(%ebp), %esp		# restore original sp+4 to sp
 	popl	%ecx				# retrieve sp + 4 (see ln 9)

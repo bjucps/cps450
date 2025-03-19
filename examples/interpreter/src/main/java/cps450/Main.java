@@ -8,7 +8,6 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ConsoleErrorListener;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import cps450.TinyParser.ProgramContext;
 
@@ -56,10 +55,10 @@ public class Main {
             System.out.println("Walking tree with TinyInterpreter...");
             new TinyInterpreter().traverse(tree);
 
-            System.out.println("Walking tree with MyTinyListenerDemo...");
-            ParseTreeWalker.DEFAULT.walk(new MyTinyListenerDemo(), tree);
-            System.out.println("Walking tree with TinyInterpreter...");
-            ParseTreeWalker.DEFAULT.walk(new TinyInterpreterListener(), tree);
+            // System.out.println("Walking tree with MyTinyListenerDemo...");
+            // ParseTreeWalker.DEFAULT.walk(new MyTinyListenerDemo(), tree);
+            // System.out.println("Walking tree with TinyInterpreter...");
+            // ParseTreeWalker.DEFAULT.walk(new TinyInterpreterListener(), tree);
             // System.out.println("Walking tree with TinyInterpreterVisitor...");
             // new TinyInterpreterVisitor().visit(tree);
         }
