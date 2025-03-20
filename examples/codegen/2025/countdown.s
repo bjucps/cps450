@@ -34,7 +34,6 @@ ENDLOOP:
     pushl   STDOUT@GOTOFF(%ebx)
     call    write@PLT    
     addl    $16, %esp
-    movl    $0, %eax    
     leal    -8(%ebp), %esp    
     popl    %ecx    
     popl    %ebx    
