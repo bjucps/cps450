@@ -1,5 +1,4 @@
     .comm x, 4, 4
-    .align 4
 STDOUT: .long 1
 SIZE: .long 10
     blastoff:
