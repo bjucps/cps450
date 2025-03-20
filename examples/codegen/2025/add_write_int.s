@@ -3,7 +3,6 @@
 # char z = x + y;
 # writeint(z);
 
-STDOUT = 1
 .globl	main				# main function (global)
 main:						# standard function prologue:
 	leal	4(%esp), %ecx	# store address sp+4 in cx as the starting point for this program.
