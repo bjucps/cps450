@@ -1,0 +1,36 @@
+class Point is
+  x: int
+  y: int
+  init(inX: int; inY: int): Point is
+  begin
+    x := inX
+    y := inY
+    init := me
+  end init
+  getX(): int is
+  begin
+    getX := x      ~ return value
+  end getX
+  setX(int newX) is
+  begin
+    x := newX
+  end setX
+end Point
+
+class Main is
+  loc: Point
+  foo(a: int; b: int): int is
+    x: int
+  begin
+    x := loc.getX()
+    foo := a + b + x
+    out.writeint(x)
+  end foo
+  start() is
+    a: int
+  begin
+    loc := (new Point).init(2, 5)
+    loc.setX(3)
+    a := foo(9, 5)
+  end start
+end Main

@@ -37,20 +37,20 @@ LOOP:                                     # loop while x > 0
     cmpl    $0, x@GOTOFF(%ebx)            # Compare 0 with x
     jle     ENDIF                         # when x <= 0, jump to ENDIF
                                           # out.writeint(_x)
-    subl    $12, %esp                     # subtract padding so that parameter + padding is a multiple of 16.
+    subl    $12, %esp                     # pre-call padding
     movl    x@GOTOFF(%ebx), %eax          # push parameter (_x)
     pushl   %eax                         
     call    writeint@PLT                  # call stub for writeint
-    addl    $16, %esp                     # clean off stack after call (always a multiple of 16).
+    addl    $16, %esp                     # post-call stack clearing
     subl    $1, x@GOTOFF(%ebx)            # x := x - 1
     jmp     LOOP
 ELSE:                                     # out.writeint(999)
-    subl    $12, %esp                     # subtract padding so that parameter + padding is a multiple of 16.    movl    x@GOTOFF(%ebx), %eax          # push parameter (_x)
+    subl    $12, %esp                     # pre-call padding
     movl    $999, %eax                    # push parameter
     pushl   %eax                         
     call    writeint@PLT                  # call stub for write
-    addl    $16, %esp                     # clean off stack after call (always a multiple of 16).
-    movl    $0, %eax                      # zero out return value.
+    addl    $16, %esp                     # post-call stack clearing
+    movl    $0, %eax                      # return value: no errors
 ENDIF:
                                           # standard function epilogue:
     leal    -8(%ebp), %esp                # restore sp+4, bx, bp, sp
