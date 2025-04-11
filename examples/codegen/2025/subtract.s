@@ -14,6 +14,6 @@ main:
     subl    -8(%ebp), %eax  # Subtract y from x.
     movl    %eax, -4(%ebp)  # put difference in a (bp-4)
     movl    $0, %eax        # zero out ax
-    leave                   # equal to mov %ebp, %esp, pop    %ebp
+    leave                   # equal to mov %ebp, %esp; pop %ebp.
     ret
     .section .note.GNU-stack,"",@progbits # security feature to allow a non-executable stack 

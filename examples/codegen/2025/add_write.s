@@ -8,25 +8,23 @@
 # }
 
 STDOUT = 1
-.globl    main                            # main function (global)
-main:                                     # standard function prologue:
-    leal    4(%esp), %ecx                 # store sp+4, sp, bp, bx, sp+4
-    andl	$-16, %esp                    # Necessary for calling write function.
-    pushl   -4(%ecx)
-    pushl   %ebp
-    movl    %esp, %ebp
-    pushl   %ebx
-    pushl   %ecx
+.globl    main
+main:
+    pushl   %ebp                          # store the original bp.
+    movl    %esp, %ebp                    # set bp.
+    pushl   %ebx                          # store original bx (at bp-4)
+    pushl   %ecx                          # store original cx (at bp-8).
+    pushl   %edx                          # store original dx (at bp-12); local variables begin at bp-16.
                                           # _GLOBAL_OFFSET_TABLE needed for write function call.
     call    __x86.get_pc_thunk.ax         # put ip in ax. See https://courses.cs.vt.edu/cs3214/spring2022/questions/pcmaterialization        
-    addl    $_GLOBAL_OFFSET_TABLE_, %eax  # set ax to _GLOBAL_OFFSET_TABLE_ + ip of <main+23>
-    movl    $6, -20(%ebp)                 # put 6 in cx
-    movl    -20(%ebp), %ecx               
-    movl    $3, -16(%ebp)                 # put 3 in dx
-    movl    -16(%ebp), %edx               
+    addl    $_GLOBAL_OFFSET_TABLE_, %eax  # set ax to _GLOBAL_OFFSET_TABLE_ + ip of <main+something>
+    movl    $6, -16(%ebp)                 # x (bp-16)= 6
+    movl    -16(%ebp), %ecx               
+    movl    $3, -20(%ebp)                 # y (bp-20)= 3
+    movl    -20(%ebp), %edx               
     addl    %ecx, %edx                    # add 6 to 3
     addl    $48, %edx                     # add '0' to sum
-    movl    %edx, -24(%ebp)               # store sum
+    movl    %edx, -24(%ebp)               # c (bp-24) = sum
     subl    $4, %esp                      # subtract padding so that parameter + padding is a multiple of 16.
                                           # parameters:
     pushl   $1                            #    3) 1 (number of bytes to write)
@@ -39,10 +37,10 @@ main:                                     # standard function prologue:
                                           #     Address of string in cx.
     addl    $16, %esp                     # clean off stack after call (always a multiple of 16).
     movl    $0, %eax                      # zero out return value.
-    leal    -8(%ebp), %esp                # restore sp+4, bx, bp, sp
-    popl    %ecx                          
-    popl    %ebx                          
-    popl    %ebp                          
-    leal    -4(%ecx), %esp                
+    leal    -12(%ebp), %esp               # set sp to bp-num_regs_pushed*4.
+    popl    %edx                          # restore dx
+    popl    %ecx                          # restore cx
+    popl    %ebx                          # restore bx
+    leave                                 # equal to mov %ebp, %esp; pop %ebp.
     ret                                   
     .section .note.GNU-stack,"",@progbits # security feature to allow a non-executable stack 
