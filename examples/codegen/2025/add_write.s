@@ -15,7 +15,7 @@ main:                                     # standard function prologue:
     pushl   %ebx                          # store original bx (at bp-4)
     pushl   %ecx                          # store original cx (at bp-8).
     pushl   %edx                          # store original dx (at bp-12); local variables begin at bp-20.
-    subl    $12, %esp                     # reserve space on the stack for the global offset table.
+    subl    $16, %esp                     # reserve space on the stack for the global offset table.
     call    __x86.get_pc_thunk.ax         # put ip in ax. See https://courses.cs.vt.edu/cs3214/spring2022/questions/pcmaterialization
     addl    $_GLOBAL_OFFSET_TABLE_, %eax  # set ax to _GLOBAL_OFFSET_TABLE_ + ip of <main+something>
     movl    $6, -20(%ebp)                 # x (bp-20)= 6

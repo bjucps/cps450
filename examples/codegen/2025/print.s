@@ -13,14 +13,15 @@ main:
     movl    %esp, %ebp                    # set bp.
     pushl   %ebx                          # store original bx (at bp-4)
     pushl   %ecx                          # store original cx (at bp-8); local variables begin at bp-12.
+    subl    $16, %esp                     # reserve space on the stack for the global offset table.
     call    __x86.get_pc_thunk.bx         # put ip in bx. See https://courses.cs.vt.edu/cs3214/spring2022/questions/pcmaterialization        
     addl    $_GLOBAL_OFFSET_TABLE_, %ebx  # set bx to _GLOBAL_OFFSET_TABLE_ + ip of <main+something>
                                           # parameters:
     subl    $4, %esp                      # subtract padding so that parameter + padding is a multiple of 16.
     pushl   $3                            # 3) 3  (number of bytes to write)
     leal    hello@GOTOFF(%ebx), %ecx      # 2) Address of hello
-    pushl   %ecx                         
-    pushl   $STDOUT                       # 1) STDOUT            
+    pushl   %ecx
+    pushl   $STDOUT                       # 1) STDOUT
     call    write@PLT                     # call stub for write:
                                           #     Return value in ax.
                                           #     Address of string in cx.

@@ -146,7 +146,7 @@ main:                                     #    local main object at bp-12 (impli
     movl    %esp, %ebp                    #    set bp.
     pushl   %ebx                          #    store original bx (at bp-4).
     pushl   %ecx                          #    store original cx (at bp-8); local variables begin at bp-12.
-
+    subl    $16, %esp                     #    reserve space on the stack for the global offset table.
     call    __x86.get_pc_thunk.bx         #    for function calls and named variables
     addl    $_GLOBAL_OFFSET_TABLE_, %ebx  #    do not overwrite bx.
 

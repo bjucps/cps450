@@ -8,6 +8,7 @@ main:                                     # standard function prologue:
     pushl   %ebp                          # store the original bp.
     movl    %esp, %ebp                    # set bp.
     pushl   %ebx                          # store original bx (at bp-4); local variables begin at bp-8.
+    subl    $16, %esp                     # reserve space on the stack for the global offset table.
     call    __x86.get_pc_thunk.bx         # put ip in bx. See https://courses.cs.vt.edu/cs3214/spring2022/questions/pcmaterialization
     addl    $_GLOBAL_OFFSET_TABLE_, %ebx  # set bx to _GLOBAL_OFFSET_TABLE_ + ip of <main+something>
     movl    $10, x@GOTOFF(%ebx)           # x := 10
