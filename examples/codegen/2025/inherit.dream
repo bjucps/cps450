@@ -41,7 +41,6 @@ class Child inherits from Parent is
     end foo
 end Child
 
-
 class Main is
   child: Child
   start() is

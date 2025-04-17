@@ -79,8 +79,8 @@ Child_initC:                                # 25: "initC(newX: int, newY: int): 
     movl    12(%ebp), %ecx                  #    newX arg: "newX"
     pushl   %ecx
     pushl   %eax                            #    me arg: "me"
-    movl    VFTChild+8@GOTOFF(%ebx), %eax   #    load VFTChild "Parent_initP"
-    call    *%eax                           # 27: "initP(newX)"
+    movl    (%eax), %ecx                    #    load VFTChild "Parent_initP"
+    call    *8(%ecx)                        # 27: "initP(newX)"
     addl    $16, %esp                       #    post-call stack clearing
 
     movl    8(%ebp), %eax                   #    retrieve "me"
@@ -107,21 +107,23 @@ Child_foo:                                  # 38: "foo() is"
     movl    %esp, %ebp                      # 39: "begin"
     pushl   %ebx
     pushl   %ecx
+    pushl   %edx
 
-    movl    8(%ebp), %ecx                   #    retrieve me
+    movl    8(%ebp), %edx                   #    retrieve me
     subl    $12, %esp                       #    pre-call padding
-    pushl   %ecx                            #    me arg: "me"
-    movl    VFTChild+16@GOTOFF(%ebx), %eax  #    load VFTChild "Parent_getX"
-    call    *%eax                           #    "getX()"
+    pushl   %edx                            #    me arg: "me"
+    movl    (%edx), %ecx                    #    load VFTChild "Parent_getX"
+    call    *16(%ecx)                       #    "getX()"
     addl    $16, %esp                       #    clear stack after call
 
-    addl    12(%ecx), %eax                  #    "getX()+y"
+    addl    12(%edx), %eax                  #    "getX()+y"
 
     subl    $12, %esp                       #    pre-call padding
     push    %eax                            #    num arg: "getX()+y"
     call    writeint@PLT                    # 40: "out.writeint(getX()+y)"
     addl    $16, %esp                       #    clear stack after call
 
+    popl    %edx
     popl    %ecx
     popl    %ebx
     leave
