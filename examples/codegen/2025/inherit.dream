@@ -1,0 +1,52 @@
+class Parent is
+  x: int
+
+  initP(newX: int): Parent is
+    begin
+      x := newX
+      initP := me
+    end init
+
+  foo() is
+    begin
+      out.writeint(x)
+    end foo
+
+  getX(): int is
+    begin
+      getX := x
+    end getX
+
+end Parent
+
+class Child inherits from Parent is
+  y: int
+
+  initC(newX: int, newY: int): Child is
+    begin
+      initP(newX)
+      y := newY
+      initC := me
+    end init
+
+  getY(): int is
+    begin
+      getY := y
+    end getY
+
+  ~ overrides Parent's foo method
+  foo() is
+    begin
+      out.writeint(getX()+y)
+    end foo
+end Child
+
+
+class Main is
+  child: Child
+  start() is
+  begin
+    child := (new Child).initC(2, 5)
+    child.foo()
+  end start
+end Main
