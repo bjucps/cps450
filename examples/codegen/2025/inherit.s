@@ -20,10 +20,8 @@ VFTChild:                                   # 22: "class Child inherits from Par
     .long   Child_initC
     .long   Child_getY
 
-
 Oyd_string:
     .string "none"
-
 .text                                       #    Read-only code section
 
 Oyd_toString:                               #    implicit toString for base class

@@ -5,7 +5,7 @@ class Parent is
     begin
       x := newX
       initP := me
-    end init
+    end initC
 
   foo() is
     begin
@@ -27,7 +27,7 @@ class Child inherits from Parent is
       initP(newX)
       y := newY
       initC := me
-    end init
+    end initC
 
   getY(): int is
     begin
