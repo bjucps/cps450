@@ -135,30 +135,34 @@ main_start:                                 #    me in bp+8, a in bp-8
     pushl   %ebp                            #    store original bp.
     movl    %esp, %ebp                      #    set bp.
     pushl   %ecx                            #    store original cx.
+    pushl   %edx                            #    store original dx.
 
     subl    $8, %esp                        #    pre-call padding
     pushl   $16                             #    size arg: 16 (8 bytes reserved and 8 bytes for x and y)
     pushl   $1                              #    number arg: 1
     call    calloc@PLT                      #    "(new Child)"
     addl    $16, %esp                       #    post-call stack clearing
+    pushl   %eax                            #    leave pointer returned from calloc on stack
+    leal    VFTChild@GOTOFF(%ebx), %ecx     #    initialize pointer to VFT for Child
+    movl    %ecx, (%eax)
 
     subl    $4, %esp                        #    pre-call padding
     pushl   $5                              #    inY arg: 5
     pushl   $2                              #    inX arg: 2
     pushl   %eax                            #    me arg: "new Child"
-    movl    VFTChild+20@GOTOFF(%ebx), %eax  #    load VFTChild "initC"
-    call    *%eax                           #    "(new Child).initC(2, 5)"
+    movl    (%eax), %ecx                    #    load VFTChild "initC"
+    call    *20(%ecx)                       #    "(new Child).initC(2, 5)"
     addl    $16, %esp                       #    clear stack after call
-    movl    8(%ebp), %ecx                   #    copying main.me to ecx
-    movl    %eax, 8(%ecx)                   # 49: "child := (new Child).initC(2, 5)"
+    movl    8(%ebp), %edx                   #    copying main.me to ecx
+    movl    %eax, 8(%edx)                   # 49: "child := (new Child).initC(2, 5)"
 
     subl    $12, %esp                       #    pre-call padding
-    pushl   8(%ecx)                         #    me arg: "child"
-    movl    VFTChild+12@GOTOFF(%ebx), %eax  #    load VFTChild "foo"
-    call    *%eax                           # 50: "child.foo()"
+    pushl   8(%edx)                         #    me arg: "child"
+    call    *12(%ecx)                       # 50: "child.foo()"
     addl    $16, %esp                       #    clear stack after call
 
     leal    -4(%ebp), %esp                  #    set sp to bp-num_regs_pushed*4.
+    popl    %edx                            #    restore dx.
     popl    %ecx                            #    restore cx.
     leave
     ret                                     # 51: "end start"
