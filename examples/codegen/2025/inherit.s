@@ -160,8 +160,6 @@ main_start:                                 #    me in bp+8, a in bp-8
     pushl   8(%edx)                         #    me arg: "child"
     call    *12(%ecx)                       # 50: "child.foo()"
     addl    $16, %esp                       #    clear stack after call
-
-    leal    -4(%ebp), %esp                  #    set sp to bp-num_regs_pushed*4.
     popl    %edx                            #    restore dx.
     popl    %ecx                            #    restore cx.
     leave
