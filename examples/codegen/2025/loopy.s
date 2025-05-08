@@ -4,15 +4,15 @@ main:
     movl    %esp, %ebp      #    set bp.
     movl    $3, -4(%ebp)    #  4: "x := 3"
                             #  5: "if (x > 0) then"
-    cmpl    $0, -4(%ebp)    # 
+    cmpl    $0, -4(%ebp)    #
     jle     ELSE            #    if x <= 0, jump to ELSE
-LOOP:                       
+LOOP:
     cmpl    $0, -4(%ebp)    #  6: "while (x > 0) {"
     jle     ENDIF           #    when x <= 0, jump to ENDIF
 
     subl    $12, %esp       #    pre-call padding
     movl    -4(%ebp), %eax  #    push parameter (x)
-    pushl   %eax                              
+    pushl   %eax
     call    writeint@PLT    #  7: "writeint(x)"
     addl    $16, %esp       #    clean off stack after call (always a multiple of 16).
     subl    $1, -4(%ebp)    #  8: "--x;"

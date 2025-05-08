@@ -27,7 +27,7 @@ Oyd_string:
 Oyd_toString:                               #    implicit toString for base class
     pushl   %ebp                            #    me: bp+8
     movl    %esp, %ebp
-    movl    Oyd_toString@GOTOFF(%ebx), %eax #    toString := "none"
+    movl    Oyd_string@GOTOFF(%ebx), %eax   #    toString := "none"
     leave
     ret
 
