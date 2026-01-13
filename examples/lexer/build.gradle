@@ -22,19 +22,20 @@ java {
     }
 }
 
-// generateGrammarSource {
-//     arguments += ["-package", "cps450"]
-// }
-
 application {
+    // Specify which class has the main() method
     mainClass = 'cps450.Main'
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-}
 
-tasks.named("generateGrammarSource") {
-    packageName = "cps450"
+tasks {
+    test {
+        // Use JUnit Platform for unit tests.
+        useJUnitPlatform()
+    }
+
+    generateGrammarSource {
+        // Tell antlr what package to put the generated source code in
+        packageName = "cps450"
+    }
 }

@@ -1,21 +1,42 @@
 plugins {
-    id 'java'
-    id 'antlr'
     id 'application'
+    id 'antlr'
 }
+
 repositories {
     mavenCentral()
 }
 
+dependencies {
+    antlr "org.antlr:antlr4:4.13.2"
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
 application {
+    // Specify which class has the main() method
     mainClass = 'cps450.Main'
 }
 
-dependencies {
-    antlr "org.antlr:antlr4:4.7.2"
-    testImplementation 'junit:junit:4.12'
-}
 
-generateGrammarSource {
-    arguments += ["-package", "cps450", "-visitor"]
+tasks {
+    test {
+        // Use JUnit Platform for unit tests.
+        useJUnitPlatform()
+    }
+
+    generateGrammarSource {
+        // Tell antlr what package to put the generated source code in
+        packageName = "cps450"
+        arguments += ["-visitor"]
+    }
 }
