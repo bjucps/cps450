@@ -7,19 +7,20 @@ class decls2 is
 
                               
   x: int                    ~ DEFINE x: int 
-  y: int 
+  x: boolean                ~ ERROR: Redefined identifier x
   s: boolean
 
   start() is
   begin
     x := 3                  ~ REFERENCE x
     
-    y := x - 1  
+    y := x - 1              ~ ERROR: Undeclared identifier y ; REFERENCE x
                                 
     s := 5 > 3              ~ REFERENCE s: boolean
 
-    out(s)
     
+    readint()              ~ ERROR: Undefined function 'readint'
+    s := tryme(5)          ~ ERROR: Undefined function 'tryme'
   end start
   
 end decls2

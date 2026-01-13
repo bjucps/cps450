@@ -8,24 +8,23 @@ repositories {
 }
 
 dependencies {
-    antlr "org.antlr:antlr4:4.7.2"
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    antlr "org.antlr:antlr4:4.13.2"
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation libs.guava
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
-
-generateGrammarSource {
-    arguments += ["-package", "cps450"]
-}
+// generateGrammarSource {
+//     arguments += ["-package", "cps450"]
+// }
 
 application {
     mainClass = 'cps450.Main'
@@ -34,4 +33,8 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.named("generateGrammarSource") {
+    packageName = "cps450"
 }

@@ -2,7 +2,6 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "antlr4.generation": {
         "mode": "none",
-    },
-    "java.compile.nullAnalysis.mode": "automatic"
+    }
 
 }

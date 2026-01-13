@@ -21,10 +21,6 @@ This project contains a demonstration scanner for a small ANTLR grammar.
 ```
 build/install/lexer/bin/lexer math.txt
 ```
-or 
-```
-./arun math.txt
-```
 
 ## Project Structure
 

@@ -1,9 +1,0 @@
-"This is a test."  
-"String w/ named escapes\t\f\n\r\"\\"
-"String w/ octal escapes\034\056" "Standard String"
-"String w/ named & octal escapes \034\n\""
-"String w/ illegal escape \q"
-"String w/ illegal escape \099"
-"An unterminated string... 
-"
-%

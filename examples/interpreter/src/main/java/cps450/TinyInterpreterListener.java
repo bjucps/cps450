@@ -13,6 +13,7 @@ import cps450.TinyParser.IntTermContext;
 import cps450.TinyParser.MulExprContext;
 import cps450.TinyParser.ParTermContext;
 import cps450.TinyParser.Read_stmtContext;
+import cps450.TinyParser.StmtContext;
 import cps450.TinyParser.TermExprContext;
 import cps450.TinyParser.Write_stmtContext;
 
@@ -36,7 +37,7 @@ public class TinyInterpreterListener extends TinyBaseListener {
 			System.out.print("Enter value for " + id + ":");
 			
 			String value = scanner.nextLine();
-			variables.put(id, Double.valueOf(value));
+			variables.put(id, new Double(value));
 		}
 	}
 
@@ -60,14 +61,14 @@ public class TinyInterpreterListener extends TinyBaseListener {
 		if (value == null) {
 			Token tok = (Token) ctx.ID().getPayload();
 			System.out.println("** WARNING: Undefined identifier " + id + " on Line " + tok.getLine());
-			value = 0.0;
+			value = new Double(0);
 		}
 		ctx.value = value;
 	}
 	
 	@Override
 	public void exitIntTerm(IntTermContext ctx) {
-		ctx.value = Double.valueOf(ctx.integer().getText());
+		ctx.value = new Double(ctx.integer().getText());
 	}
 	
 
@@ -82,11 +83,13 @@ public class TinyInterpreterListener extends TinyBaseListener {
 	public void exitAddExpr(AddExprContext ctx) {
 		Double value1 = ctx.e1.value;
 		Double value2 = ctx.e2.value;
-            ctx.value = switch (ctx.add_op().getText()) {
-				case "+" -> value1 + value2;
-				case "-" -> value1 - value2;
-				default -> throw new RuntimeException("Unknown operator type: " + ctx.add_op().getText());
-			};
+		if (ctx.add_op().getText().equals("+")) {			
+			ctx.value = value1 + value2;
+		} else if (ctx.add_op().getText().equals("-")) {
+			ctx.value = value1 - value2;
+		} else {
+			throw new RuntimeException("Unknown operator type: " + ctx.add_op().getText());
+		}
 	}
 
 	@Override
