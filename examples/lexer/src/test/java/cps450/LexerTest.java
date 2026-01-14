@@ -1,7 +1,7 @@
 package cps450;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class LexerTest {
 
 	}
 
-	private void assertNextToken(int type, String value) throws IOException {
+	void assertNextToken(int type, String value) throws IOException {
 		Token tok = lex.nextToken();
 		System.err.println(tok.getLine() + ":" + tok.getCharPositionInLine() + ":" + tok.getText());
 		assertTrue(tok.getType() == type);
@@ -33,7 +33,7 @@ public class LexerTest {
 
 	}
 
-	private void assertNextToken(int type) throws IOException {
+	void assertNextToken(int type) throws IOException {
 		Token tok = lex.nextToken();
 		System.err.println(tok.getLine() + ":" + tok.getCharPositionInLine() + ":" + tok.getText());
 		assertTrue(tok.getType() == type);

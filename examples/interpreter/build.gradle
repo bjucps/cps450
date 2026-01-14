@@ -25,6 +25,8 @@ java {
 application {
     // Specify which class has the main() method
     mainClass = 'cps450.Main'
+    // Specify name for generated run script
+    applicationName = 'app'
 }
 
 
@@ -37,6 +39,7 @@ tasks {
     generateGrammarSource {
         // Tell antlr what package to put the generated source code in
         packageName = "cps450"
+        // Generate visitor classes
         arguments += ["-visitor"]
     }
 }

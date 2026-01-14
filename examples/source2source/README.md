@@ -10,9 +10,8 @@ To build this project, execute:
 gradlew install
 ```
 
-
 To run this project, execute:
 
 ```
-build/install/source2source/bin/source2source -ds -dp program.tiny
+build/install/app/bin/app -ds -dp program.tiny
 ```

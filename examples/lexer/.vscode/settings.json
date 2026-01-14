@@ -1,7 +1,6 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "antlr4.generation": {
-        "mode": "none",
-    }
-
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "antlr4.generation": {
+    "mode": "none"
+  }
 }
